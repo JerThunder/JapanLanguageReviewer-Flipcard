@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Top Section (Small) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yourTopSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your top section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JLPT N4"
+            android:gravity="center_horizontal"
+            android:textSize="25dp"
+            />
+    </LinearLayout>
+
+    <!-- Middle Section (Large) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/yourMiddleSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your middle section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"
+            android:background="@color/grays"
+            >
+
+            <TextView
+                android:id="@+id/idSpecial"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:text="hello world"
+                android:textAlignment="center"
+                android:background="@color/colorSpecial"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:alpha="0"
+                android:elevation="5dp"
+                />
+
+
+            <TextView
+                android:id="@+id/idfrontcard"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:text="hello world"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/idbackcard"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:text="hello world"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:alpha="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/flipbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show Notes"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/idfrontcard" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </LinearLayout>
+
+    <!-- Bottom Section (Small) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yourBottomSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your bottom section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+
+
+        <!-- Horizontal LinearLayout for Previous and Next Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/idPrevBtn"
+                android:layout_width="0dp"
+                android:background="@color/blue"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Previous"/>
+
+            <Button
+                android:id="@+id/idNextBtn"
+                android:background="@color/blue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Next"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

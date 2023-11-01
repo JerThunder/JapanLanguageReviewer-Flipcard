@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Top Section (Small) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yourTopSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your top section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JLPT N4"
+            android:gravity="center_horizontal"
+            android:textSize="25dp"
+            />
+    </LinearLayout>
+
+    <!-- Middle Section (Large) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/yourMiddleSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your middle section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search Here.." >
+
+            </androidx.appcompat.widget.SearchView>
+
+
+
+            <!-- Add any other views or widgets above the ListView here -->
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1dp"/>
+            <!-- Add any other views or widgets below the ListView here -->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Bottom Section (Small) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yourBottomSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your bottom section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bottom Section"
+            android:gravity="center_horizontal"
+            />
+
+
+    </LinearLayout>
+</LinearLayout>

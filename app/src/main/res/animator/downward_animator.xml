@@ -1,0 +1,23 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Initial state with alpha = 1 and rotationX = 0 degrees -->
+    <objectAnimator
+        android:valueFrom="1.0"
+        android:valueTo="0"
+        android:propertyName="alpha"
+        android:duration="250" />
+
+    <!-- Animation to move the view upward -->
+    <objectAnimator
+        android:valueFrom="0"
+        android:valueTo="-300"
+    android:propertyName="translationY"
+    android:duration="250" />
+
+    <!-- Animation to make the view fully transparent -->
+    <objectAnimator
+        android:valueFrom="1.0"
+        android:valueTo="0.0"
+        android:propertyName="alpha"
+        android:startOffset="0"
+        android:duration="250" />
+</set>
