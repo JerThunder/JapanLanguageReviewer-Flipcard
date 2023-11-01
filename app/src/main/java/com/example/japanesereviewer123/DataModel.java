@@ -5,25 +5,40 @@ import android.os.Parcelable;
 
 public class DataModel implements Parcelable {
     private String id;
-    private String firstname;
-    private String lastname;
+
+    public DataModel(String id, String kanji, String hiragana, String meaning) {
+        this.id = id;
+        this.kanji = kanji;
+        this.hiragana = hiragana;
+        this.meaning = meaning;
+    }
+
+    private String kanji;
+    private String hiragana;
+    private String meaning;
+
+
+
+    public String getMeaning() {return meaning; }
+
     public String getId() {
         return id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getkanji() {
+        return kanji;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String gethiragana() {
+        return hiragana;
     }
 
 
     protected DataModel(Parcel in) {
         id = in.readString();
-        firstname = in.readString();
-        lastname = in.readString();
+        kanji = in.readString();
+        hiragana = in.readString();
+        meaning = in.readString();
     }
 
 
@@ -47,21 +62,14 @@ public class DataModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(id);
-        parcel.writeString(firstname);
-        parcel.writeString(lastname);
+        parcel.writeString(kanji);
+        parcel.writeString(hiragana);
+        parcel.writeString(meaning);
     }
-
-
-    public DataModel(String id, String firstname, String lastname) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
-
 
 
 
     public String toString() {
-        return firstname;
+        return kanji;
     }
 }

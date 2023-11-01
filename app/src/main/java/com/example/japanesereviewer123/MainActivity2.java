@@ -69,8 +69,9 @@ public class MainActivity2 extends AppCompatActivity {
              currentIndexFiltered = intent.getIntExtra("currentIndexFiltered", -1); // Default value if not found
            currentIndexOriginal = intent.getIntExtra("currentIndexOriginal", -2);
            String id = intent.getStringExtra("id");
-            String firstname = intent.getStringExtra("firstname");
-            String lastname = intent.getStringExtra("lastname");
+            String kanji = intent.getStringExtra("kanji");
+            String hiragana = intent.getStringExtra("hiragana");
+            String meaning = intent.getStringExtra("meaning");
 
 
             Log.d("Debug", "MainActivity2_currentIndexOriginal: " + currentIndexOriginal);
@@ -79,8 +80,9 @@ public class MainActivity2 extends AppCompatActivity {
             Log.d("Debug","MainAcvitiy2_OriginalData: " + originalData);
         Log.d("Debug","MainAcvitiy2_FilteredData: " + filteredData);
 
-            textFront.setText(firstname);
-            textBack.setText(lastname);
+            textFront.setText(kanji);
+            textBack.setText(hiragana);
+            textSpecial.setText(meaning);
         textFront.setCameraDistance(8000 * scale);
         textBack.setCameraDistance(8000 * scale);
 
@@ -373,8 +375,8 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void updateUI123() {
         DataModel selectedData = originalData.get(currentIndexOriginal);
-        textFront.setText(selectedData.getFirstname());
-        textBack.setText(selectedData.getLastname());
+        textFront.setText(selectedData.getkanji());
+        textBack.setText(selectedData.gethiragana());
     }
 
 

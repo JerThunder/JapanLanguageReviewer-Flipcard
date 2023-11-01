@@ -14,13 +14,27 @@
 
         <!-- Add your top section content here -->
         <!-- Example: TextViews, ImageViews, Buttons, etc. -->
-        <TextView
+        <!-- Horizontal Layout for Image and Text -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="JLPT N4"
-            android:gravity="center_horizontal"
-            android:textSize="25dp"
-            />
+            android:orientation="horizontal">
+
+            <!-- ImageView with fixed height -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:src="@drawable/n4banner"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="JLPT N4"
+                android:background="@color/maroon"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Middle Section (Large) -->
@@ -144,8 +158,14 @@
                 android:layout_weight="1"
                 android:text="Next"/>
 
-        </LinearLayout>
 
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JLPT N4"
+            android:gravity="center_horizontal" />
 
     </LinearLayout>
 </LinearLayout>

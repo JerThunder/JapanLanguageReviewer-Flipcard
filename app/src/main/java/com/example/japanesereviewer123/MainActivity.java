@@ -73,14 +73,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        filterData("Doe"); // Passing an empty string to show all data initially
-
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               // DataModel selecteddata = adapter.getItem(i);
+
                 DataModel selecteddata = filteredData.get(i);
                 int indexInFilteredData = i;
 
@@ -92,19 +89,15 @@ public class MainActivity extends AppCompatActivity {
                     indexInOriginalData = i;
                 }
 
-             //   Log.d("indexInOriginalData", String.valueOf(indexInOriginalData));
-             //   Log.d("indexInFilteredData", String.valueOf(indexInFilteredData));
-
-                Toast.makeText(getApplicationContext(), String.valueOf(filteredData.get(i)),Toast.LENGTH_SHORT).show();
-
                   Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                   intent.putParcelableArrayListExtra("filteredData", filteredData);
                intent.putParcelableArrayListExtra("originalData", originalData);
                 intent.putExtra("currentIndexFiltered", indexInFilteredData);
                 intent.putExtra("currentIndexOriginal", indexInOriginalData);
                 intent.putExtra("id", selecteddata.getId());
-                    intent.putExtra("firstname", selecteddata.getFirstname());
-                 intent.putExtra("lastname", selecteddata.getLastname());
+                    intent.putExtra("kanji", selecteddata.getkanji());
+                 intent.putExtra("hiragana", selecteddata.gethiragana());
+                intent.putExtra("meaning", selecteddata.getMeaning());
                    startActivity(intent);
 
 
@@ -130,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                //do in background
                try {
-                   URL url = new URL("http://192.168.100.64:80/japan/indexjapan2.php");
+                   URL url = new URL("http://192.168.100.64:80/japan/indexjapan.php");
                    HttpURLConnection httpURLConnection  = (HttpURLConnection) url.openConnection();
                    InputStream inputStream = httpURLConnection.getInputStream();
                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -149,10 +142,11 @@ public class MainActivity extends AppCompatActivity {
                    {
                        JSONObject jsonObject = jsonArray.getJSONObject(i);
                        String id = jsonObject.getString("id");
-                       String firstname = jsonObject.getString("firstname");
-                       String lastname = jsonObject.getString("lastname");
-                       originalData.add(new DataModel(id,firstname,lastname));
-                       filteredData.add(new DataModel(id, firstname, lastname));
+                       String kanji = jsonObject.getString("kanji");
+                       String hiragana = jsonObject.getString("hiragana");
+                       String meaning = jsonObject.getString("meaning");
+                       originalData.add(new DataModel(id,kanji,hiragana,meaning));
+                       filteredData.add(new DataModel(id, kanji, hiragana,meaning));
 
                    }
 
@@ -178,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
     private void filterData(String query) {
         filteredData.clear();
         for (DataModel data : originalData) {
-            if (data.getFirstname().toLowerCase().contains(query.toLowerCase())) {
+            if (data.getkanji().toLowerCase().contains(query.toLowerCase())) {
                 filteredData.add(data);
             }
         }
