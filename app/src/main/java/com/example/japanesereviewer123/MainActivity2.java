@@ -1,5 +1,6 @@
 package com.example.japanesereviewer123;
 
+import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.content.Context;
@@ -7,10 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,7 +27,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         Button flipbtn,nextBtn,prevBtn;
 
-    AnimatorSet frontAnim,backAnim,upwardAnim,downwardAnim;
+    AnimatorSet frontAnim,backAnim,upwardAnim,downwardAnim,rightwardExitAnim,leftwardentranceAnim,rightEntranceAnim,leftExitAnim;
     private int currentIndexOriginal;
     private int currentIndexFiltered;
     boolean isFront = true;
@@ -50,6 +54,10 @@ public class MainActivity2 extends AppCompatActivity {
         backAnim = new AnimatorSet();
         upwardAnim = new AnimatorSet();
         downwardAnim = new AnimatorSet();
+        rightwardExitAnim = new AnimatorSet();
+        leftwardentranceAnim = new AnimatorSet();
+        rightEntranceAnim = new AnimatorSet();
+
 
         float scale = getApplicationContext().getResources().getDisplayMetrics().density;
 
@@ -82,20 +90,64 @@ public class MainActivity2 extends AppCompatActivity {
         backAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.back_animator);
         upwardAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.upward_animator);
         downwardAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.downward_animator);
-
-
+        rightwardExitAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.rightexit_animator);
+        leftwardentranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.leftentrance_animator);
+        rightEntranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.rightentrance_animator);
+        leftExitAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.leftexit_animator);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Integer varOriginalDataSize = originalData.size() - 1;
 
+
+
                 if (currentIndexOriginal >= varOriginalDataSize )
                 {
                         Toast.makeText(getApplicationContext(),"You Reached the End",Toast.LENGTH_SHORT).show();
                 }else {
+
                     currentIndexOriginal++;
-                    updateUI123();
+
+                     rightwardExitAnim.setTarget(textFront);
+                     rightwardExitAnim.start();
+
+
+                     rightwardExitAnim.addListener(new Animator.AnimatorListener() {
+                         @Override
+                         public void onAnimationStart(@NonNull Animator animation) {
+
+                         }
+
+                         @Override
+                         public void onAnimationEnd(@NonNull Animator animation) {
+                             leftwardentranceAnim.setTarget(textFront);
+                             leftwardentranceAnim.start();
+
+                             updateUI123();
+
+
+
+
+                         }
+
+                         @Override
+                         public void onAnimationCancel(@NonNull Animator animation) {
+
+                         }
+
+                         @Override
+                         public void onAnimationRepeat(@NonNull Animator animation) {
+
+                         }
+                     });
+
+
+
+
+                    Log.d("Debug","currentIndexOriginal: " + currentIndexOriginal);
+                    Log.d("Debug","currentIndexOriginal: " + varOriginalDataSize);
+
                 }
 
             }
@@ -107,11 +159,43 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 Integer varOriginalDataSize = originalData.size() - 1;
 
+
                 if (currentIndexOriginal <= 0) {
                     Toast.makeText(getApplicationContext(),"You Reached the Beginning",Toast.LENGTH_SHORT).show();
                 }else {
                     currentIndexOriginal--;
-                    updateUI123();
+
+                    leftExitAnim.setTarget(textFront);
+                    leftExitAnim.start();
+
+                    leftExitAnim.addListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(@NonNull Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(@NonNull Animator animation) {
+                              rightEntranceAnim.setTarget(textFront);
+                              rightEntranceAnim.start();
+                            updateUI123();
+
+                        }
+
+                        @Override
+                        public void onAnimationCancel(@NonNull Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(@NonNull Animator animation) {
+
+                        }
+                    });
+
+
+
+
                 }
             }
         });
