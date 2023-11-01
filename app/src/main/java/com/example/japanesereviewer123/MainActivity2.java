@@ -109,8 +109,15 @@ public class MainActivity2 extends AppCompatActivity {
 
                     currentIndexOriginal++;
 
-                     rightwardExitAnim.setTarget(textFront);
-                     rightwardExitAnim.start();
+
+                    if (isFront == true)
+                    {
+                        rightwardExitAnim.setTarget(textFront);
+                        rightwardExitAnim.start();
+                    } else {
+                        rightwardExitAnim.setTarget(textBack);
+                        rightwardExitAnim.start();
+                    }
 
 
                      rightwardExitAnim.addListener(new Animator.AnimatorListener() {
@@ -121,8 +128,15 @@ public class MainActivity2 extends AppCompatActivity {
 
                          @Override
                          public void onAnimationEnd(@NonNull Animator animation) {
-                             leftwardentranceAnim.setTarget(textFront);
-                             leftwardentranceAnim.start();
+
+                             if (isFront == true)
+                             {
+                                 leftwardentranceAnim.setTarget(textFront);
+                                 leftwardentranceAnim.start();
+                             } else {
+                                 leftwardentranceAnim.setTarget(textBack);
+                                 leftwardentranceAnim.start();
+                             }
 
                              updateUI123();
 
@@ -165,8 +179,17 @@ public class MainActivity2 extends AppCompatActivity {
                 }else {
                     currentIndexOriginal--;
 
-                    leftExitAnim.setTarget(textFront);
-                    leftExitAnim.start();
+
+                    if(isFront == true){
+                        leftExitAnim.setTarget(textFront);
+                        leftExitAnim.start();
+                    } else{
+                        leftExitAnim.setTarget(textBack);
+                        leftExitAnim.start();
+                    }
+
+
+
 
                     leftExitAnim.addListener(new Animator.AnimatorListener() {
                         @Override
@@ -176,8 +199,17 @@ public class MainActivity2 extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(@NonNull Animator animation) {
-                              rightEntranceAnim.setTarget(textFront);
-                              rightEntranceAnim.start();
+
+
+                            if(isFront == true){
+                                rightEntranceAnim.setTarget(textFront);
+                                rightEntranceAnim.start();
+                            } else{
+                                rightEntranceAnim.setTarget(textBack);
+                                rightEntranceAnim.start();
+                            }
+
+
                             updateUI123();
 
                         }
@@ -206,22 +238,67 @@ public class MainActivity2 extends AppCompatActivity {
         textFront.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isFront) {
+                if (isFront == true) {
                     frontAnim.setTarget(textFront);
-                    backAnim.setTarget(textBack);
                     frontAnim.start();
-                    backAnim.start();
-                    isFront = false;
-                    textSpecial.setAlpha(0.0f);
-                    isShow= false;
+
+                    frontAnim.addListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(@NonNull Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(@NonNull Animator animation) {
+
+                            backAnim.setTarget(textBack);
+                            backAnim.start();
+                            isFront = false;
+                            textSpecial.setAlpha(0.0f);
+                            isShow= false;
+                        }
+
+                        @Override
+                        public void onAnimationCancel(@NonNull Animator animation) {
+
+                        }
+                        @Override
+                        public void onAnimationRepeat(@NonNull Animator animation) {
+                        }
+                    });
+
+
                 } else {
-                    frontAnim.setTarget(textBack);
+
                     backAnim.setTarget(textFront);
                     backAnim.start();
-                    frontAnim.start();
-                    isFront = true;
-                    textSpecial.setAlpha(0.0f);
-                    isShow= false;
+
+                    backAnim.addListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(@NonNull Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(@NonNull Animator animation) {
+                            frontAnim.setTarget(textBack);
+                            frontAnim.start();
+                            isFront = true;
+                            textSpecial.setAlpha(0.0f);
+                            isShow= false;
+                        }
+
+                        @Override
+                        public void onAnimationCancel(@NonNull Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(@NonNull Animator animation) {
+
+                        }
+                    });
+
                 }
 
             }
