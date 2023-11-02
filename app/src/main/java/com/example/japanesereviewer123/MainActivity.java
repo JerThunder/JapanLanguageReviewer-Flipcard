@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
     private void filterData(String query) {
         filteredData.clear();
         for (DataModel data : originalData) {
-            if (data.getkanji().toLowerCase().contains(query.toLowerCase())) {
+            if (data.getkanji().toLowerCase().contains(query.toLowerCase()) || data.gethiragana().toLowerCase().contains(query.toLowerCase())) {
                 filteredData.add(data);
             }
         }

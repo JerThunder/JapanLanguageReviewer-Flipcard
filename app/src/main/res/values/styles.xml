@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="RectangularButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@null</item> <!-- Set the background to null to remove the rounded shape -->
-        <item name="android:padding">16dp</item> <!-- Adjust padding as needed -->
-        <item name="android:textColor">@android:color/white</item> <!-- Text color -->
+    <style name="NoButtonStyle">
+        <!-- No styling attributes here -->
     </style>
 
+    <style name="CustomButtonStyle">
+        <item name="android:background">@drawable/button_border</item> <!-- Reference your custom drawable -->
+        <item name="android:textColor">@color/your_text_color</item> <!-- Change text color if needed -->
+    </style>
+
+    <color name="your_text_color">#DB5A50</color>
 </resources>

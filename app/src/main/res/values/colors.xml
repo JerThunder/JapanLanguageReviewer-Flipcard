@@ -12,4 +12,10 @@
     <color name="yourTopSectionColor">#F44336</color>
     <color name="yourBottomSectionColor">#F44336</color>
     <color name="yourMiddleSectionColor">#2A010101</color>
+    <color name="color123">#72605F</color>
+    <color name="transparent">#3BF44336</color>
+    <color name="transparents">#B9755F5E</color>
+    <color name="transparentss">#23F44336</color>
+    <color name="listviewColor">#E25C5858</color>
+    <color name="lightcolors">#DAD1D0</color>
 </resources>

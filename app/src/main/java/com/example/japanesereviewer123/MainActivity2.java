@@ -80,9 +80,12 @@ public class MainActivity2 extends AppCompatActivity {
             Log.d("Debug","MainAcvitiy2_OriginalData: " + originalData);
         Log.d("Debug","MainAcvitiy2_FilteredData: " + filteredData);
 
-            textFront.setText(kanji);
-            textBack.setText(hiragana);
-            textSpecial.setText(meaning);
+
+
+
+            textFront.setText("KANJI \n" + kanji);
+            textBack.setText("HIRAGANA \n" + hiragana);
+            textSpecial.setText("MEMO \n" + meaning);
         textFront.setCameraDistance(8000 * scale);
         textBack.setCameraDistance(8000 * scale);
 
@@ -112,17 +115,31 @@ public class MainActivity2 extends AppCompatActivity {
                     currentIndexOriginal++;
 
 
+
+
+                    if(isShow == true)
+                    {
+                        downwardAnim.setTarget(textSpecial);
+                        downwardAnim.start();
+                        isShow = false;
+
+                    }
+
+
                     if (isFront == true)
                     {
                         rightwardExitAnim.setTarget(textFront);
                         rightwardExitAnim.start();
+
+
                     } else {
                         rightwardExitAnim.setTarget(textBack);
                         rightwardExitAnim.start();
+
                     }
 
 
-                     rightwardExitAnim.addListener(new Animator.AnimatorListener() {
+                    rightwardExitAnim.addListener(new Animator.AnimatorListener() {
                          @Override
                          public void onAnimationStart(@NonNull Animator animation) {
 
@@ -140,10 +157,8 @@ public class MainActivity2 extends AppCompatActivity {
                                  leftwardentranceAnim.start();
                              }
 
+
                              updateUI123();
-
-
-
 
                          }
 
@@ -159,10 +174,6 @@ public class MainActivity2 extends AppCompatActivity {
                      });
 
 
-
-
-                    Log.d("Debug","currentIndexOriginal: " + currentIndexOriginal);
-                    Log.d("Debug","currentIndexOriginal: " + varOriginalDataSize);
 
                 }
 
@@ -182,9 +193,23 @@ public class MainActivity2 extends AppCompatActivity {
                     currentIndexOriginal--;
 
 
+
+
+
+                    if(isShow == true)
+                    {
+                        downwardAnim.setTarget(textSpecial);
+                        downwardAnim.start();
+                        isShow = false;
+
+                    }
+
+
+
                     if(isFront == true){
                         leftExitAnim.setTarget(textFront);
                         leftExitAnim.start();
+
                     } else{
                         leftExitAnim.setTarget(textBack);
                         leftExitAnim.start();
@@ -375,8 +400,9 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void updateUI123() {
         DataModel selectedData = originalData.get(currentIndexOriginal);
-        textFront.setText(selectedData.getkanji());
-        textBack.setText(selectedData.gethiragana());
+        textFront.setText("KANJI \n" + selectedData.getkanji());
+        textBack.setText("HIRAGANA \n" + selectedData.gethiragana());
+        textSpecial.setText("MEMO \n" + selectedData.getMeaning());
     }
 
 

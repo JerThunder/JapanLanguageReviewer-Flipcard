@@ -41,24 +41,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+             android:background="@color/listviewColor"
             android:orientation="vertical">
 
             <!-- Add your middle section content here -->
             <!-- Example: TextViews, ImageViews, Buttons, etc. -->
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:iconifiedByDefault="false"
-                android:queryHint="Search Here..">
-            </androidx.appcompat.widget.SearchView>
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:iconifiedByDefault="true"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusedByDefault="true"
+                    android:queryHint="Search Here..">
+                </androidx.appcompat.widget.SearchView>
+
+
+            </LinearLayout>
+
+
+
 
             <!-- Add any other views or widgets above the ListView here -->
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="1dp" />
             <!-- Add any other views or widgets below the ListView here -->

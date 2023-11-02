@@ -70,6 +70,13 @@ public class DataModel implements Parcelable {
 
 
     public String toString() {
-        return kanji;
+       // return "Kanji: " + kanji + "";
+        int labelWidth = 10; // Adjust the label width as needed.
+
+        // Create the Kanji and Hiragana strings without any additional text
+        String kanjiString = String.format("%-" + labelWidth + "s: %-" + labelWidth + "s", "Kanji", kanji);
+        String hiraganaString = String.format("%-" + labelWidth + "s: %-" + labelWidth + "s", "Hiragana", hiragana);
+
+        return kanjiString + hiraganaString;
     }
 }
