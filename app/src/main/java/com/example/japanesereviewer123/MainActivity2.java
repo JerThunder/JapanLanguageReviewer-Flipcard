@@ -3,9 +3,12 @@ package com.example.japanesereviewer123;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,11 +24,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity2 extends AppCompatActivity {
         TextView textFront,textBack,textSpecial;
 
-        Button flipbtn,nextBtn,prevBtn;
+        Button flipbtn,nextBtn,prevBtn,btnPlay;
 
     AnimatorSet frontAnim,backAnim,upwardAnim,downwardAnim,rightwardExitAnim,leftwardentranceAnim,rightEntranceAnim,leftExitAnim;
     private int currentIndexOriginal;
@@ -34,7 +38,8 @@ public class MainActivity2 extends AppCompatActivity {
     boolean isShow = false;
     private ArrayList<DataModel> originalData;
     private ArrayList<DataModel> filteredData;
-
+    private TextToSpeech textToSpeech;
+    private static final int TTS_CHECK_CODE = 1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +52,7 @@ public class MainActivity2 extends AppCompatActivity {
         flipbtn = findViewById(R.id.flipbtn);
         nextBtn = findViewById(R.id.idNextBtn);
         prevBtn = findViewById(R.id.idPrevBtn);
-
+        btnPlay = findViewById(R.id.idPlay);
 
 
         frontAnim = new AnimatorSet();
@@ -74,11 +79,25 @@ public class MainActivity2 extends AppCompatActivity {
             String meaning = intent.getStringExtra("meaning");
 
 
-            Log.d("Debug", "MainActivity2_currentIndexOriginal: " + currentIndexOriginal);
-            Log.d("Debug", "MainActivity2_currentIndexFiltered: " + currentIndexFiltered);
+            textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
+                    if (status == TextToSpeech.SUCCESS) {
+                        int result = textToSpeech.setLanguage(Locale.JAPAN);
+                        if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                            // Handle language data missing or not supported.
 
-            Log.d("Debug","MainAcvitiy2_OriginalData: " + originalData);
-        Log.d("Debug","MainAcvitiy2_FilteredData: " + filteredData);
+                            showLanguageDataDownloadDialog();
+
+                        }
+                    } else {
+                        // Handle TTS initialization failure.
+                    }
+                }
+            });
+
+
+
 
 
 
@@ -99,6 +118,23 @@ public class MainActivity2 extends AppCompatActivity {
         leftwardentranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.leftentrance_animator);
         rightEntranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.rightentrance_animator);
         leftExitAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.leftexit_animator);
+
+
+
+
+
+
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                speakJapanese();
+               // String textSpeak = "こにちは";
+             //   textToSpeech.speak(textSpeak,textToSpeech.QUEUE_FLUSH,null,null);
+            }
+        });
+
+
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -398,12 +434,58 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
 
+    protected void onDestroy() {
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onDestroy();
+    }
+
+
+    private void showLanguageDataDownloadDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Language Data Missing");
+        builder.setMessage("The required language data is missing. Do you want to download it?");
+        builder.setPositiveButton("Download", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Launch an intent to download the language data.
+                Intent installIntent = new Intent();
+                installIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Handle the user's choice to cancel the download.
+            }
+        });
+        builder.create().show();
+    }
+
+
+
+
     private void updateUI123() {
         DataModel selectedData = originalData.get(currentIndexOriginal);
         textFront.setText("KANJI \n" + selectedData.getkanji());
         textBack.setText("HIRAGANA \n" + selectedData.gethiragana());
         textSpecial.setText("MEMO \n" + selectedData.getMeaning());
     }
+
+
+    private void speakJapanese()
+    {
+
+
+        DataModel selectedData = originalData.get(currentIndexOriginal);
+        String speakThis = selectedData.getkanji();
+        textToSpeech.speak(speakThis,textToSpeech.QUEUE_FLUSH,null,null);
+    }
+
+
 
 
 }
