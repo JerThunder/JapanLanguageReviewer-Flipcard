@@ -40,40 +40,99 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.loading_screen);
+
+
+        originalData = new ArrayList<>();
+        filteredData = new ArrayList<>();
+
+
+        //ExecutorService Functions (Alternative of Asynctask)
+        ExecutorService service  = Executors.newSingleThreadExecutor();
+        service.execute(new Runnable() {
+            String data =  "";
+            @Override
+            public void run() {
+                //onPreExecute
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                });
+
+                //do in background
+                try {
+                    URL url = new URL("https://animerepository.com/110796/indexjapan110796.php");
+                    HttpURLConnection httpURLConnection  = (HttpURLConnection) url.openConnection();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line = "";
+
+                    while (line != null){
+                        line = bufferedReader.readLine();
+                        data = data + line;
+
+                    }
+                    Log.d("JSON Response", data);
+                    JSONArray jsonArray = new JSONArray(data);
+                    originalData.clear();
+                    filteredData.clear();
+                    for (int i = 0; i<jsonArray.length(); i++)
+                    {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String id = jsonObject.getString("id");
+                        String kanji = jsonObject.getString("kanji");
+                        String hiragana = jsonObject.getString("hiragana");
+                        String meaning = jsonObject.getString("meaning");
+                        originalData.add(new DataModel(id,kanji,hiragana,meaning));
+                        filteredData.add(new DataModel(id, kanji, hiragana,meaning));
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //OnPostExecute
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        switchtoMainLayout();
+                        listviewOnClick();
+                        searchFunctions();
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+
+
+    }
+
+
+
+
+    private void switchtoMainLayout() {
         setContentView(R.layout.activity_main);
 
-
-
+        // Get a reference to the ListView in the main layout
+        listView = findViewById(R.id.listView);
 
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.searchView);
-        originalData = new ArrayList<>();
-        filteredData = new ArrayList<>();
 
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,filteredData);
         listView.setAdapter(adapter);
 
-        searchView.setQueryHint("Search Here..");
+    }
 
 
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-
-                    return true;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-
-                    filterData(newText);
-
-                    return true;
-                }
-            });
 
 
+    private void listviewOnClick(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -89,96 +148,48 @@ public class MainActivity extends AppCompatActivity {
                     indexInOriginalData = i;
                 }
 
-                  Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                  intent.putParcelableArrayListExtra("filteredData", filteredData);
-               intent.putParcelableArrayListExtra("originalData", originalData);
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                intent.putParcelableArrayListExtra("filteredData", filteredData);
+                intent.putParcelableArrayListExtra("originalData", originalData);
                 intent.putExtra("currentIndexFiltered", indexInFilteredData);
                 intent.putExtra("currentIndexOriginal", indexInOriginalData);
                 intent.putExtra("id", selecteddata.getId());
-                    intent.putExtra("kanji", selecteddata.getkanji());
-                 intent.putExtra("hiragana", selecteddata.gethiragana());
+                intent.putExtra("kanji", selecteddata.getkanji());
+                intent.putExtra("hiragana", selecteddata.gethiragana());
                 intent.putExtra("meaning", selecteddata.getMeaning());
-                   startActivity(intent);
+                startActivity(intent);
 
 
             }
         });
-
-
-
-
-        //ExecutorService Functions (Alternative of Asynctask)
-        ExecutorService service  = Executors.newSingleThreadExecutor();
-        service.execute(new Runnable() {
-           String data =  "";
-           @Override
-           public void run() {
-                //onPreExecute
-               runOnUiThread(new Runnable() {
-                   @Override
-                   public void run() {
-
-                   }
-               });
-
-               //do in background
-               try {
-                   URL url = new URL("http://192.168.100.64:80/japan/indexjapan.php");
-                   HttpURLConnection httpURLConnection  = (HttpURLConnection) url.openConnection();
-                   InputStream inputStream = httpURLConnection.getInputStream();
-                   BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                   String line = "";
-
-                   while (line != null){
-                       line = bufferedReader.readLine();
-                       data = data + line;
-
-                   }
-                   Log.d("JSON Response", data);
-                   JSONArray jsonArray = new JSONArray(data);
-                   originalData.clear();
-                   filteredData.clear();
-                   for (int i = 0; i<jsonArray.length(); i++)
-                   {
-                       JSONObject jsonObject = jsonArray.getJSONObject(i);
-                       String id = jsonObject.getString("id");
-                       String kanji = jsonObject.getString("kanji");
-                       String hiragana = jsonObject.getString("hiragana");
-                       String meaning = jsonObject.getString("meaning");
-                       originalData.add(new DataModel(id,kanji,hiragana,meaning));
-                       filteredData.add(new DataModel(id, kanji, hiragana,meaning));
-
-                   }
-
-               } catch (Exception e) {
-                   e.printStackTrace();
-               }
-
-               //OnPostExecute
-               runOnUiThread(new Runnable() {
-                   @Override
-                   public void run() {
-                       adapter.notifyDataSetChanged();
-                   }
-               });
-           }
-       });
-
-
-
     }
 
 
-    private void filterData(String query) {
-        filteredData.clear();
-        for (DataModel data : originalData) {
-            if (data.getkanji().toLowerCase().contains(query.toLowerCase()) || data.gethiragana().toLowerCase().contains(query.toLowerCase())) {
-                filteredData.add(data);
+    private void searchFunctions(){
+        searchView.setQueryHint("Search Here..");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return true;
             }
-        }
-        adapter.notifyDataSetChanged();
-    }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                filteredData.clear();
+                for (DataModel data : originalData) {
+                    if (data.getkanji().toLowerCase().contains(newText.toLowerCase()) || data.gethiragana().toLowerCase().contains(newText.toLowerCase())) {
+                        filteredData.add(data);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+                return true;
+            }
+        });
+    }
 
 
 
