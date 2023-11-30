@@ -24,14 +24,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
+import java.util.Random;
 
 public class MainActivity2 extends AppCompatActivity {
-        TextView textFront,textBack,textSpecial;
+    TextView textFront, textBack, textSpecial;
 
-        Button flipbtn,nextBtn,prevBtn,btnPlay;
+    Button flipbtn, nextBtn, prevBtn, btnPlay, btnrandom;
 
-    AnimatorSet frontAnim,backAnim,upwardAnim,downwardAnim,rightwardExitAnim,leftwardentranceAnim,rightEntranceAnim,leftExitAnim;
+    AnimatorSet frontAnim, backAnim, upwardAnim, downwardAnim, rightwardExitAnim, leftwardentranceAnim, rightEntranceAnim, leftExitAnim;
     private int currentIndexOriginal;
     private int currentIndexFiltered;
     boolean isFront = true;
@@ -40,6 +42,7 @@ public class MainActivity2 extends AppCompatActivity {
     private ArrayList<DataModel> filteredData;
     private TextToSpeech textToSpeech;
     private static final int TTS_CHECK_CODE = 1;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public class MainActivity2 extends AppCompatActivity {
         nextBtn = findViewById(R.id.idNextBtn);
         prevBtn = findViewById(R.id.idPrevBtn);
         btnPlay = findViewById(R.id.idPlay);
-
+        btnrandom = findViewById(R.id.idbtnrandomizer);
 
         frontAnim = new AnimatorSet();
         backAnim = new AnimatorSet();
@@ -68,43 +71,38 @@ public class MainActivity2 extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-             originalData = intent.getParcelableArrayListExtra("originalData"); // The original data
-             filteredData = intent.getParcelableArrayListExtra("filteredData"); // The filtered data
+        originalData = intent.getParcelableArrayListExtra("originalData"); // The original data
+        filteredData = intent.getParcelableArrayListExtra("filteredData"); // The filtered data
 
-             currentIndexFiltered = intent.getIntExtra("currentIndexFiltered", -1); // Default value if not found
-           currentIndexOriginal = intent.getIntExtra("currentIndexOriginal", -2);
-           String id = intent.getStringExtra("id");
-            String kanji = intent.getStringExtra("kanji");
-            String hiragana = intent.getStringExtra("hiragana");
-            String meaning = intent.getStringExtra("meaning");
+        currentIndexFiltered = intent.getIntExtra("currentIndexFiltered", -1); // Default value if not found
+        currentIndexOriginal = intent.getIntExtra("currentIndexOriginal", -2);
+        String id = intent.getStringExtra("id");
+        String kanji = intent.getStringExtra("kanji");
+        String hiragana = intent.getStringExtra("hiragana");
+        String meaning = intent.getStringExtra("meaning");
 
 
-            textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-                @Override
-                public void onInit(int status) {
-                    if (status == TextToSpeech.SUCCESS) {
-                        int result = textToSpeech.setLanguage(Locale.JAPAN);
-                        if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                            // Handle language data missing or not supported.
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = textToSpeech.setLanguage(Locale.JAPAN);
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        // Handle language data missing or not supported.
 
-                            showLanguageDataDownloadDialog();
+                        showLanguageDataDownloadDialog();
 
-                        }
-                    } else {
-                        // Handle TTS initialization failure.
                     }
+                } else {
+                    // Handle TTS initialization failure.
                 }
-            });
+            }
+        });
 
 
-
-
-
-
-
-            textFront.setText("KANJI \n" + kanji);
-            textBack.setText("HIRAGANA \n" + hiragana);
-            textSpecial.setText("MEMO \n" + meaning);
+        textFront.setText("KANJI \n" + kanji);
+        textBack.setText("HIRAGANA \n" + hiragana);
+        textSpecial.setText("MEMO \n" + meaning);
         textFront.setCameraDistance(8000 * scale);
         textBack.setCameraDistance(8000 * scale);
 
@@ -112,16 +110,12 @@ public class MainActivity2 extends AppCompatActivity {
 
         frontAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.front_animator);
         backAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.back_animator);
-        upwardAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.upward_animator);
-        downwardAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.downward_animator);
-        rightwardExitAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.rightexit_animator);
-        leftwardentranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.leftentrance_animator);
-        rightEntranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.rightentrance_animator);
-        leftExitAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context,R.animator.leftexit_animator);
-
-
-
-
+        upwardAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.upward_animator);
+        downwardAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.downward_animator);
+        rightwardExitAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.rightexit_animator);
+        leftwardentranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.leftentrance_animator);
+        rightEntranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.rightentrance_animator);
+        leftExitAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.leftexit_animator);
 
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -129,11 +123,10 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
 
                 speakJapanese();
-               // String textSpeak = "こにちは";
-             //   textToSpeech.speak(textSpeak,textToSpeech.QUEUE_FLUSH,null,null);
+                // String textSpeak = "こにちは";
+                //   textToSpeech.speak(textSpeak,textToSpeech.QUEUE_FLUSH,null,null);
             }
         });
-
 
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -141,20 +134,14 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 Integer varOriginalDataSize = originalData.size() - 1;
 
-
-
-                if (currentIndexOriginal >= varOriginalDataSize )
-                {
-                        Toast.makeText(getApplicationContext(),"You Reached the End",Toast.LENGTH_SHORT).show();
-                }else {
+                if (currentIndexOriginal >= varOriginalDataSize) {
+                    Toast.makeText(getApplicationContext(), "You Reached the End", Toast.LENGTH_SHORT).show();
+                } else {
 
                     currentIndexOriginal++;
 
 
-
-
-                    if(isShow == true)
-                    {
+                    if (isShow == true) {
                         downwardAnim.setTarget(textSpecial);
                         downwardAnim.start();
                         isShow = false;
@@ -162,8 +149,7 @@ public class MainActivity2 extends AppCompatActivity {
                     }
 
 
-                    if (isFront == true)
-                    {
+                    if (isFront == true) {
                         rightwardExitAnim.setTarget(textFront);
                         rightwardExitAnim.start();
 
@@ -176,39 +162,37 @@ public class MainActivity2 extends AppCompatActivity {
 
 
                     rightwardExitAnim.addListener(new Animator.AnimatorListener() {
-                         @Override
-                         public void onAnimationStart(@NonNull Animator animation) {
+                        @Override
+                        public void onAnimationStart(@NonNull Animator animation) {
 
-                         }
+                        }
 
-                         @Override
-                         public void onAnimationEnd(@NonNull Animator animation) {
+                        @Override
+                        public void onAnimationEnd(@NonNull Animator animation) {
 
-                             if (isFront == true)
-                             {
-                                 leftwardentranceAnim.setTarget(textFront);
-                                 leftwardentranceAnim.start();
-                             } else {
-                                 leftwardentranceAnim.setTarget(textBack);
-                                 leftwardentranceAnim.start();
-                             }
+                            if (isFront == true) {
+                                leftwardentranceAnim.setTarget(textFront);
+                                leftwardentranceAnim.start();
+                            } else {
+                                leftwardentranceAnim.setTarget(textBack);
+                                leftwardentranceAnim.start();
+                            }
 
 
-                             updateUI123();
+                            updateUI123();
 
-                         }
+                        }
 
-                         @Override
-                         public void onAnimationCancel(@NonNull Animator animation) {
+                        @Override
+                        public void onAnimationCancel(@NonNull Animator animation) {
 
-                         }
+                        }
 
-                         @Override
-                         public void onAnimationRepeat(@NonNull Animator animation) {
+                        @Override
+                        public void onAnimationRepeat(@NonNull Animator animation) {
 
-                         }
-                     });
-
+                        }
+                    });
 
 
                 }
@@ -224,16 +208,12 @@ public class MainActivity2 extends AppCompatActivity {
 
 
                 if (currentIndexOriginal <= 0) {
-                    Toast.makeText(getApplicationContext(),"You Reached the Beginning",Toast.LENGTH_SHORT).show();
-                }else {
+                    Toast.makeText(getApplicationContext(), "You Reached the Beginning", Toast.LENGTH_SHORT).show();
+                } else {
                     currentIndexOriginal--;
 
 
-
-
-
-                    if(isShow == true)
-                    {
+                    if (isShow == true) {
                         downwardAnim.setTarget(textSpecial);
                         downwardAnim.start();
                         isShow = false;
@@ -241,17 +221,14 @@ public class MainActivity2 extends AppCompatActivity {
                     }
 
 
-
-                    if(isFront == true){
+                    if (isFront == true) {
                         leftExitAnim.setTarget(textFront);
                         leftExitAnim.start();
 
-                    } else{
+                    } else {
                         leftExitAnim.setTarget(textBack);
                         leftExitAnim.start();
                     }
-
-
 
 
                     leftExitAnim.addListener(new Animator.AnimatorListener() {
@@ -264,10 +241,10 @@ public class MainActivity2 extends AppCompatActivity {
                         public void onAnimationEnd(@NonNull Animator animation) {
 
 
-                            if(isFront == true){
+                            if (isFront == true) {
                                 rightEntranceAnim.setTarget(textFront);
                                 rightEntranceAnim.start();
-                            } else{
+                            } else {
                                 rightEntranceAnim.setTarget(textBack);
                                 rightEntranceAnim.start();
                             }
@@ -289,13 +266,9 @@ public class MainActivity2 extends AppCompatActivity {
                     });
 
 
-
-
                 }
             }
         });
-
-
 
 
         textFront.setOnClickListener(new View.OnClickListener() {
@@ -318,13 +291,14 @@ public class MainActivity2 extends AppCompatActivity {
                             backAnim.start();
                             isFront = false;
                             textSpecial.setAlpha(0.0f);
-                            isShow= false;
+                            isShow = false;
                         }
 
                         @Override
                         public void onAnimationCancel(@NonNull Animator animation) {
 
                         }
+
                         @Override
                         public void onAnimationRepeat(@NonNull Animator animation) {
                         }
@@ -348,7 +322,7 @@ public class MainActivity2 extends AppCompatActivity {
                             frontAnim.start();
                             isFront = true;
                             textSpecial.setAlpha(0.0f);
-                            isShow= false;
+                            isShow = false;
                         }
 
                         @Override
@@ -378,13 +352,11 @@ public class MainActivity2 extends AppCompatActivity {
                     backAnim.start();
                     isFront = false;
 
-                    if(isShow == true)
-                    {
+                    if (isShow == true) {
                         downwardAnim.setTarget(textSpecial);
                         downwardAnim.start();
                         isShow = false;
                     }
-
 
 
                 } else {
@@ -394,8 +366,7 @@ public class MainActivity2 extends AppCompatActivity {
                     frontAnim.start();
                     isFront = true;
 
-                    if(isShow == true)
-                    {
+                    if (isShow == true) {
                         downwardAnim.setTarget(textSpecial);
                         downwardAnim.start();
                         isShow = false;
@@ -406,19 +377,17 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
 
-
         flipbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)   {
-                if (!isShow)
-                {
+            public void onClick(View view) {
+                if (!isShow) {
                     textSpecial.setAlpha(1.0f);
                     upwardAnim.setTarget(textSpecial);
                     upwardAnim.start();
-                    isShow= true;
-                }else{
+                    isShow = true;
+                } else {
 
-                   textSpecial.setAlpha(0.0f);
+                    textSpecial.setAlpha(0.0f);
                     downwardAnim.setTarget(textSpecial);
                     downwardAnim.start();
                     isShow = false;
@@ -427,8 +396,13 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
 
+        btnrandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                randomizer();
 
-
+            }
+        });
 
 
     }
@@ -466,14 +440,67 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
 
-
-
     private void updateUI123() {
         DataModel selectedData = originalData.get(currentIndexOriginal);
         textFront.setText("KANJI \n" + selectedData.getkanji());
         textBack.setText("HIRAGANA \n" + selectedData.gethiragana());
         textSpecial.setText("MEMO \n" + selectedData.getMeaning());
     }
+
+
+
+    private void randomizer() {
+
+        Collections.shuffle(originalData, new Random());
+        currentIndexOriginal = 0;
+
+
+        if (isFront == true) {
+            rightwardExitAnim.setTarget(textFront);
+            rightwardExitAnim.start();
+
+
+        } else {
+            rightwardExitAnim.setTarget(textBack);
+            rightwardExitAnim.start();
+
+        }
+
+
+        rightwardExitAnim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(@NonNull Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(@NonNull Animator animation) {
+
+                if (isFront == true) {
+                    leftwardentranceAnim.setTarget(textFront);
+                    leftwardentranceAnim.start();
+                } else {
+                    leftwardentranceAnim.setTarget(textBack);
+                    leftwardentranceAnim.start();
+                }
+
+
+                updateUI123();
+
+            }
+
+            @Override
+            public void onAnimationCancel(@NonNull Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(@NonNull Animator animation) {
+
+            }
+        });
+    }
+
 
 
     private void speakJapanese()
