@@ -37,6 +37,13 @@ public class N4DashboardActivity extends AppCompatActivity {
         });
 
 
+        btnvocabulary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(N4DashboardActivity.this,Vocabdetails_Acitivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         btngrammar.setOnClickListener(new View.OnClickListener() {

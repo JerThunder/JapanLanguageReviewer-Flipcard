@@ -56,6 +56,11 @@
             android:exported="true"
             android:screenOrientation="portrait"
             ></activity>
+        <activity
+            android:name=".Vocabdetails_Acitivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            ></activity>
 
     </application>
 
