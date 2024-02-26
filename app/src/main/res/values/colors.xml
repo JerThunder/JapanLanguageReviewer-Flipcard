@@ -18,4 +18,5 @@
     <color name="transparentss">#23F44336</color>
     <color name="listviewColor">#E25C5858</color>
     <color name="lightcolors">#DAD1D0</color>
+    <color name="pressed_color">#F84639</color>
 </resources>

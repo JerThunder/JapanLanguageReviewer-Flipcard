@@ -68,18 +68,21 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
                 app:layout_constraintTop_toTopOf="parent"
+
                 >
 
                 <Button
-                    android:id="@+id/idAdd"
+                    android:id="@+id/idbtnrandomizer"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                   android:layout_marginTop="50dp"
-                    android:background="@color/blue"
-                    android:text="Add"
-                     />
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/btnpress"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:text="Ramdom"
+                    android:padding="12dp"
 
-
+                    />
 
 
                 <Button
@@ -88,18 +91,19 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@color/blue"
+                    android:background="@drawable/btnpress"
                     android:text="Play"
                     />
 
                 <Button
-                    android:id="@+id/idEdit"
+                    android:id="@+id/idDetails"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@color/blue"
-                    android:text="Edit"
+                    android:background="@drawable/btnpress"
+                    android:textAlignment="center"
+                    android:text="Details"
                     />
 
             </LinearLayout>
@@ -155,26 +159,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/flipbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show Notes"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/idfrontcard" />
-
-
-            <Button
-                android:id="@+id/idbtnrandomizer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Randomizer"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/flipbtn" />
 
 
 

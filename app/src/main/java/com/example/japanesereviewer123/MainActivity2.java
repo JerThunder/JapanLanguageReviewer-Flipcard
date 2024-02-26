@@ -29,20 +29,19 @@ import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity2 extends AppCompatActivity {
-    TextView textFront, textBack, textSpecial;
+    TextView textFront, textBack;
 
-    Button flipbtn, nextBtn, prevBtn, btnPlay, btnrandom;
+    Button  nextBtn, prevBtn, btnPlay, btnrandom,btndetails;
 
     AnimatorSet frontAnim, backAnim, upwardAnim, downwardAnim, rightwardExitAnim, leftwardentranceAnim, rightEntranceAnim, leftExitAnim;
     private int currentIndexOriginal;
     private int currentIndexFiltered;
     boolean isFront = true;
-    boolean isShow = false;
     private ArrayList<DataModel> originalData;
     private ArrayList<DataModel> filteredData;
     private TextToSpeech textToSpeech;
     private static final int TTS_CHECK_CODE = 1;
-
+    String passKanji,passMeaning,passhiragana;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +50,9 @@ public class MainActivity2 extends AppCompatActivity {
 
         textFront = findViewById(R.id.idfrontcard);
         textBack = findViewById(R.id.idbackcard);
-        textSpecial = findViewById(R.id.idSpecial);
-        flipbtn = findViewById(R.id.flipbtn);
         nextBtn = findViewById(R.id.idNextBtn);
         prevBtn = findViewById(R.id.idPrevBtn);
+        btndetails = findViewById(R.id.idDetails);
         btnPlay = findViewById(R.id.idPlay);
         btnrandom = findViewById(R.id.idbtnrandomizer);
 
@@ -101,8 +99,8 @@ public class MainActivity2 extends AppCompatActivity {
 
 
         textFront.setText("KANJI \n" + kanji);
-        textBack.setText("HIRAGANA \n" + hiragana);
-        textSpecial.setText("MEMO \n" + meaning);
+        textBack.setText("HIRAGANA \n" + hiragana + "\n\n" + "MEANING \n" + meaning);
+
         textFront.setCameraDistance(8000 * scale);
         textBack.setCameraDistance(8000 * scale);
 
@@ -116,6 +114,25 @@ public class MainActivity2 extends AppCompatActivity {
         leftwardentranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.leftentrance_animator);
         rightEntranceAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.rightentrance_animator);
         leftExitAnim = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.leftexit_animator);
+
+
+
+        btndetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the current data model
+                DataModel selectedData = originalData.get(currentIndexOriginal);
+                // Update passKanji with the current kanji
+                passKanji = selectedData.getkanji();
+                passMeaning = selectedData.getMeaning();
+                passhiragana=  selectedData.gethiragana();
+                Intent intent = new Intent(MainActivity2.this, Kanjibreakdown_Activity.class);
+                intent.putExtra("kanji", passKanji);
+                intent.putExtra("meaning",passMeaning);
+                intent.putExtra("hiragana",passhiragana);
+                startActivity(intent);
+            }
+        });
 
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -139,14 +156,6 @@ public class MainActivity2 extends AppCompatActivity {
                 } else {
 
                     currentIndexOriginal++;
-
-
-                    if (isShow == true) {
-                        downwardAnim.setTarget(textSpecial);
-                        downwardAnim.start();
-                        isShow = false;
-
-                    }
 
 
                     if (isFront == true) {
@@ -211,14 +220,6 @@ public class MainActivity2 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You Reached the Beginning", Toast.LENGTH_SHORT).show();
                 } else {
                     currentIndexOriginal--;
-
-
-                    if (isShow == true) {
-                        downwardAnim.setTarget(textSpecial);
-                        downwardAnim.start();
-                        isShow = false;
-
-                    }
 
 
                     if (isFront == true) {
@@ -290,8 +291,7 @@ public class MainActivity2 extends AppCompatActivity {
                             backAnim.setTarget(textBack);
                             backAnim.start();
                             isFront = false;
-                            textSpecial.setAlpha(0.0f);
-                            isShow = false;
+
                         }
 
                         @Override
@@ -321,8 +321,7 @@ public class MainActivity2 extends AppCompatActivity {
                             frontAnim.setTarget(textBack);
                             frontAnim.start();
                             isFront = true;
-                            textSpecial.setAlpha(0.0f);
-                            isShow = false;
+
                         }
 
                         @Override
@@ -352,12 +351,6 @@ public class MainActivity2 extends AppCompatActivity {
                     backAnim.start();
                     isFront = false;
 
-                    if (isShow == true) {
-                        downwardAnim.setTarget(textSpecial);
-                        downwardAnim.start();
-                        isShow = false;
-                    }
-
 
                 } else {
                     frontAnim.setTarget(textBack);
@@ -366,34 +359,11 @@ public class MainActivity2 extends AppCompatActivity {
                     frontAnim.start();
                     isFront = true;
 
-                    if (isShow == true) {
-                        downwardAnim.setTarget(textSpecial);
-                        downwardAnim.start();
-                        isShow = false;
-                    }
                 }
 
             }
         });
 
-
-        flipbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!isShow) {
-                    textSpecial.setAlpha(1.0f);
-                    upwardAnim.setTarget(textSpecial);
-                    upwardAnim.start();
-                    isShow = true;
-                } else {
-
-                    textSpecial.setAlpha(0.0f);
-                    downwardAnim.setTarget(textSpecial);
-                    downwardAnim.start();
-                    isShow = false;
-                }
-            }
-        });
 
 
         btnrandom.setOnClickListener(new View.OnClickListener() {
@@ -443,8 +413,8 @@ public class MainActivity2 extends AppCompatActivity {
     private void updateUI123() {
         DataModel selectedData = originalData.get(currentIndexOriginal);
         textFront.setText("KANJI \n" + selectedData.getkanji());
-        textBack.setText("HIRAGANA \n" + selectedData.gethiragana());
-        textSpecial.setText("MEMO \n" + selectedData.getMeaning());
+        textBack.setText("HIRAGANA \n" + selectedData.gethiragana() + "\n\n" + "MEANING \n" + selectedData.getMeaning());
+        passKanji = selectedData.getkanji();
     }
 
 
