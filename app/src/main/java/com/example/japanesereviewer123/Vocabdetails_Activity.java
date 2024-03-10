@@ -3,6 +3,7 @@ package com.example.japanesereviewer123;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.squareup.picasso.Picasso;
 
@@ -31,6 +33,7 @@ public class Vocabdetails_Activity extends AppCompatActivity {
     String imageurl;
     TextView textBack, txtvocab;
     Button nextBtn, prevBtn, btnPlay, btnrandom;
+    ConstraintLayout testlayout;
     AnimatorSet frontAnim, backAnim, upwardAnim, downwardAnim, rightwardExitAnim, leftwardentranceAnim, rightEntranceAnim, leftExitAnim;
     private int currentIndexOriginal;
     private int currentIndexFiltered;
@@ -42,6 +45,7 @@ public class Vocabdetails_Activity extends AppCompatActivity {
     private static final int TTS_CHECK_CODE = 1;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,8 @@ public class Vocabdetails_Activity extends AppCompatActivity {
         prevBtn = findViewById(R.id.idPrevBtn);
         btnPlay = findViewById(R.id.idPlay);
         btnrandom = findViewById(R.id.idbtnrandomizer);
+        testlayout = findViewById(R.id.testlayout);
+
 
         frontAnim = new AnimatorSet();
         backAnim = new AnimatorSet();
@@ -141,12 +147,14 @@ public class Vocabdetails_Activity extends AppCompatActivity {
                     currentIndexOriginal++;
 
                     if (isFront == true) {
-                        rightwardExitAnim.setTarget(img1);
+                        rightwardExitAnim.setTarget(testlayout);
+
                         rightwardExitAnim.start();
 
 
                     } else {
-                        rightwardExitAnim.setTarget(textBack);
+                        rightwardExitAnim.setTarget(testlayout);
+
                         rightwardExitAnim.start();
 
                     }
@@ -162,10 +170,12 @@ public class Vocabdetails_Activity extends AppCompatActivity {
                         public void onAnimationEnd(@NonNull Animator animation) {
 
                             if (isFront == true) {
-                                leftwardentranceAnim.setTarget(img1);
+                                leftwardentranceAnim.setTarget(testlayout);
+
                                 leftwardentranceAnim.start();
                             } else {
-                                leftwardentranceAnim.setTarget(textBack);
+                                leftwardentranceAnim.setTarget(testlayout);
+
                                 leftwardentranceAnim.start();
                             }
 
@@ -205,11 +215,11 @@ public class Vocabdetails_Activity extends AppCompatActivity {
 
 
                     if (isFront == true) {
-                        leftExitAnim.setTarget(img1);
+                        leftExitAnim.setTarget(testlayout);
                         leftExitAnim.start();
 
                     } else {
-                        leftExitAnim.setTarget(textBack);
+                        leftExitAnim.setTarget(testlayout);
                         leftExitAnim.start();
                     }
 
@@ -225,10 +235,10 @@ public class Vocabdetails_Activity extends AppCompatActivity {
 
 
                             if (isFront == true) {
-                                rightEntranceAnim.setTarget(img1);
+                                rightEntranceAnim.setTarget(testlayout);
                                 rightEntranceAnim.start();
                             } else {
-                                rightEntranceAnim.setTarget(textBack);
+                                rightEntranceAnim.setTarget(testlayout);
                                 rightEntranceAnim.start();
                             }
 
@@ -289,7 +299,7 @@ public class Vocabdetails_Activity extends AppCompatActivity {
 
                 } else {
 
-                    backAnim.setTarget(img1);
+                    backAnim.setTarget(textBack);
                     backAnim.start();
 
                     backAnim.addListener(new Animator.AnimatorListener() {
@@ -300,7 +310,7 @@ public class Vocabdetails_Activity extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(@NonNull Animator animation) {
-                            frontAnim.setTarget(textBack);
+                            frontAnim.setTarget(img1);
                             frontAnim.start();
                             isFront = true;
                             isShow = false;
@@ -408,12 +418,12 @@ public class Vocabdetails_Activity extends AppCompatActivity {
 
 
         if (isFront == true) {
-            rightwardExitAnim.setTarget(img1);
+            rightwardExitAnim.setTarget(testlayout);
             rightwardExitAnim.start();
 
 
         } else {
-            rightwardExitAnim.setTarget(textBack);
+            rightwardExitAnim.setTarget(testlayout);
             rightwardExitAnim.start();
 
         }
@@ -429,10 +439,10 @@ public class Vocabdetails_Activity extends AppCompatActivity {
             public void onAnimationEnd(@NonNull Animator animation) {
 
                 if (isFront == true) {
-                    leftwardentranceAnim.setTarget(img1);
+                    leftwardentranceAnim.setTarget(testlayout);
                     leftwardentranceAnim.start();
                 } else {
-                    leftwardentranceAnim.setTarget(textBack);
+                    leftwardentranceAnim.setTarget(testlayout);
                     leftwardentranceAnim.start();
                 }
 

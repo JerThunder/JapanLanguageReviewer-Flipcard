@@ -30,6 +30,7 @@ public class Vocab_Activity extends AppCompatActivity {
     private ArrayList<GoiDataModel> filteredData;
     private ListView listView;
     private ArrayAdapter<GoiDataModel> adapter;
+    private Vocab_Adapter vocab_adapter;
     private SearchView searchView;
 
     @Override
@@ -100,7 +101,7 @@ public class Vocab_Activity extends AppCompatActivity {
                         switchtoMainLayout();
                         listviewOnClick();
                         searchFunctions();
-                        adapter.notifyDataSetChanged();
+                        vocab_adapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -116,9 +117,8 @@ public class Vocab_Activity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.searchView);
 
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,filteredData);
-        listView.setAdapter(adapter);
+        vocab_adapter = new Vocab_Adapter(this, R.layout.vocab_listrow,filteredData);
+        listView.setAdapter(vocab_adapter);
 
     }
 
@@ -177,7 +177,7 @@ public class Vocab_Activity extends AppCompatActivity {
                         filteredData.add(data);
                     }
                 }
-                adapter.notifyDataSetChanged();
+                vocab_adapter.notifyDataSetChanged();
 
                 return true;
             }

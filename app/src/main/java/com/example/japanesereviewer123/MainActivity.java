@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<DataModel> filteredData;
     private ListView listView;
     private ArrayAdapter<DataModel> adapter;
+    private Kanji_Adapter kanji_adapter;
     private SearchView searchView;
 
     @Override
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         switchtoMainLayout();
                         listviewOnClick();
                         searchFunctions();
-                        adapter.notifyDataSetChanged();
+                        kanji_adapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -123,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.searchView);
 
+        kanji_adapter = new Kanji_Adapter(this,R.layout.kanjiwords_listrow,filteredData);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,filteredData);
-        listView.setAdapter(adapter);
+        listView.setAdapter(kanji_adapter);
 
     }
 
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                         filteredData.add(data);
                     }
                 }
-                adapter.notifyDataSetChanged();
+                kanji_adapter.notifyDataSetChanged();
 
                 return true;
             }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:layout_height="match_parent">
+
+    <ImageView
+
+        android:id="@+id/kanjiImage"
+        android:layout_width="70dp"
+        android:background="@color/white"
+        android:layout_height="70dp"
+        android:src="@drawable/reviewerlogo"
+
+        />
+
+
+
+    <TextView
+        android:id="@+id/txtKanjiwords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/kanjiImage"
+        android:text="Kanji: 建物"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp" />
+
+
+    <TextView
+        android:id="@+id/txtHiraganaWords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/kanjiImage"
+        android:layout_below="@+id/txtKanjiwords"
+        android:text="Hiragana: たてもの"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp" />
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

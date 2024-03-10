@@ -31,6 +31,7 @@ public class GrammarActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter<GrammarDataModel> adapter;
     private SearchView searchView;
+    private Grammar_Adapter grammar_adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class GrammarActivity extends AppCompatActivity {
                         switchtoMainLayout();
                         listviewOnClick();
                         searchFunctions();
-                        adapter.notifyDataSetChanged();
+                        grammar_adapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -117,9 +118,9 @@ public class GrammarActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.searchView);
 
+        grammar_adapter = new Grammar_Adapter(this,R.layout.grammar_listrow,filteredData);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,filteredData);
-        listView.setAdapter(adapter);
+        listView.setAdapter(grammar_adapter);
 
     }
 
@@ -177,7 +178,7 @@ public class GrammarActivity extends AppCompatActivity {
                         filteredData.add(data);
                     }
                 }
-                adapter.notifyDataSetChanged();
+                grammar_adapter.notifyDataSetChanged();
 
                 return true;
             }
