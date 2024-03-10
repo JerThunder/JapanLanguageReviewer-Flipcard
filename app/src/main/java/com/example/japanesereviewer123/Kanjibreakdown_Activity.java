@@ -84,8 +84,11 @@ public class Kanjibreakdown_Activity extends AppCompatActivity {
                                 String kanjidesc = kanjiObject.getString("kanjidesc");
                                 String kanjiMeaning = kanjiObject.getString("kanjimeaning");
                                 String imageurl = kanjiObject.getString("imageurl");
-                                originalData.add(new Kanjibreakdown_Model(id, kanjiChar,kanjiMeaning, kanjidesc, imageurl));
-                                filteredData.add(new Kanjibreakdown_Model(id, kanjiChar,kanjiMeaning, kanjidesc, imageurl));
+                                String kunyomi = kanjiObject.getString("kunyomi");
+                                String onyomi = kanjiObject.getString("onyomi");
+                                String level = kanjiObject.getString("level");
+                                originalData.add(new Kanjibreakdown_Model(id, kanjiChar,kanjiMeaning, kanjidesc, imageurl,kunyomi,onyomi,level));
+                                filteredData.add(new Kanjibreakdown_Model(id, kanjiChar,kanjiMeaning, kanjidesc, imageurl,kunyomi,onyomi,level));
                             }
                         }
                     }

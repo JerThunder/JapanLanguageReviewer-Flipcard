@@ -37,12 +37,15 @@ public class Kanjibreakdown_Adapter extends ArrayAdapter<Kanjibreakdown_Model> {
 
         ImageView imageView = convertView.findViewById(R.id.kanjiImage);
         TextView txtTitle = convertView.findViewById(R.id.txtTitle);
-        TextView txtDesc = convertView.findViewById(R.id.txtDesc);
-
+        TextView txtKunyomi = convertView.findViewById(R.id.txtkunyomi);
+        TextView txtOnyomi = convertView.findViewById(R.id.txtonyomi);
+        TextView txtlevel = convertView.findViewById(R.id.txtlevel);
 
         Picasso.get().load(getItem(position).getImageUrl()).into(imageView);
         txtTitle.setText(getItem(position).getKanjiMeaning());
-        txtDesc.setText(getItem(position).getKanjiDesc());
+        txtKunyomi.setText("Kun: " + getItem(position).getKunyomi());
+        txtOnyomi.setText("On: " + getItem(position).getOnyomi());
+        txtlevel.setText("Level: " + getItem(position).getLevel());
 
         return convertView;
 

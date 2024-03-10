@@ -95,9 +95,17 @@
                     android:textColor="@color/white"
                     android:text="Kanji Word"/>
 
+
+
+
             </LinearLayout>
 
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
 
 

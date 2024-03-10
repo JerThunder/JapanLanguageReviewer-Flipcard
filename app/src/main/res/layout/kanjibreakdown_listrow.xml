@@ -7,9 +7,9 @@
     <ImageView
 
         android:id="@+id/kanjiImage"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:background="@color/white"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
 
         />
 
@@ -25,16 +25,43 @@
 
 
     <TextView
-        android:id="@+id/txtDesc"
+        android:id="@+id/txtkunyomi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtTitle"
         android:layout_toRightOf="@id/kanjiImage"
-        android:text="hello world"
+        android:text="Kun: ありがとう"
         android:textStyle="italic"
         android:maxLength="50"
         android:textSize="15dp"
         android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/txtonyomi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtkunyomi"
+        android:layout_toRightOf="@id/kanjiImage"
+        android:text="On:　ございます "
+        android:textStyle="italic"
+        android:maxLength="50"
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/txtlevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtonyomi"
+        android:layout_toRightOf="@id/kanjiImage"
+        android:text="Level: N4"
+        android:textStyle="italic"
+        android:maxLength="50"
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp" />
+
+
+
 
 
 

@@ -6,13 +6,18 @@ public class Kanjibreakdown_Model {
     String KanjiMeaning;
     String KanjiDesc;
     String ImageUrl;
-
-    public Kanjibreakdown_Model(String id, String kanjiChar, String kanjiMeaning, String kanjiDesc, String imageUrl) {
+    String Kunyomi;
+    String Onyomi;
+    String Level;
+    public Kanjibreakdown_Model(String id, String kanjiChar, String kanjiMeaning, String kanjiDesc, String imageUrl, String kunyomi, String onyomi, String level) {
         this.id = id;
         KanjiChar = kanjiChar;
         KanjiDesc = kanjiDesc;
         ImageUrl = imageUrl;
         KanjiMeaning = kanjiMeaning;
+        Kunyomi = kunyomi;
+        Onyomi = onyomi;
+        Level = level;
     }
 
     public String getId() {
@@ -54,4 +59,17 @@ public class Kanjibreakdown_Model {
     public void setImageUrl(String imageUrl) {
         ImageUrl = imageUrl;
     }
+
+    public String getKunyomi() {return Kunyomi;}
+
+    public void setKunyomi(String kunyomi) {Kunyomi = kunyomi;}
+
+    public String getOnyomi() {return Onyomi;}
+
+    public void setOnyomi(String onyomi) {Onyomi = onyomi;}
+
+    public String getLevel() {return Level;}
+
+    public void setLevel(String level) {Level = level;}
+
 }
