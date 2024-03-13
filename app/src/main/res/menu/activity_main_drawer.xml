@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_n5"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="JLPT N5 Reviewer" />
+        <item
+            android:id="@+id/nav_n4"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="JLPT N4 Reviewer" />
+
+        <item
+            android:id="@+id/nav_n3"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="JLPT N3 Reviewer" />
+
+        <item
+            android:id="@+id/nav_n2"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="JLPT N2 Reviewer" />
+
+        <item
+            android:id="@+id/nav_n1"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="JLPT N1 Reviewer" />
+
+    </group>
+</menu>

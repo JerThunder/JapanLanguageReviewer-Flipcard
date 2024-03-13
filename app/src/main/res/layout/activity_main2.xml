@@ -43,7 +43,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/yourMiddleSectionColor"
         android:orientation="vertical">
 
 
@@ -57,11 +56,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".MainActivity"
-            android:background="@color/grays"
             >
 
 
             <LinearLayout
+                android:layout_marginTop="80dp"
                 android:layout_margin="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,13 +70,13 @@
 
                 >
 
-                <Button
+                <TextView
                     android:id="@+id/idbtnrandomizer"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/btnpress"
-                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btnselector"
+                    android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:text="Ramdom"
                     android:padding="12dp"
@@ -85,57 +84,43 @@
                     />
 
 
-                <Button
+                <TextView
                     android:id="@+id/idPlay"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="50dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/btnselector"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/btnpress"
+                    android:textColor="@color/white"
                     android:text="Play"
                     />
 
-                <Button
+                <TextView
                     android:id="@+id/idDetails"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/btnpress"
                     android:textAlignment="center"
-                    android:text="Details"
-                    />
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btnselector"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:text="Details"/>
+
+
 
             </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/idSpecial"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:text="hello world"
-                android:textAlignment="center"
-                android:background="@color/colorSpecial"
-                android:gravity="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:alpha="0"
-                android:elevation="5dp"
-                />
-
-
             <TextView
                 android:id="@+id/idfrontcard"
+                android:layout_marginTop="80dp"
                 android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:textSize="25dp"
                 android:text="hello world"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:background="@color/colorPrimary"
+                android:background="@color/blue"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -145,8 +130,9 @@
 
             <TextView
                 android:id="@+id/idbackcard"
+                android:layout_marginTop="80dp"
                 android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:text="hello world"
                 android:textSize="25dp"
                 android:textAlignment="center"
@@ -187,20 +173,35 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <TextView
                 android:id="@+id/idPrevBtn"
                 android:layout_width="0dp"
-                android:background="@color/blue"
-                android:layout_height="wrap_content"
+                android:background="@drawable/btnselector"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:textSize="30dp"
+                android:textColor="@color/white"
                 android:text="Previous"/>
 
-            <Button
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:textSize="30dp"
+
+                />
+            <TextView
                 android:id="@+id/idNextBtn"
-                android:background="@color/blue"
+                android:background="@drawable/btnselector"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
                 android:text="Next"/>
 
 

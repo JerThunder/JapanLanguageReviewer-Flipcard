@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_n5">
+
+    <fragment
+        android:id="@+id/nav_n5"
+        android:name="com.example.japanesereviewer123.ui.navn5.N5Fragment"
+        android:label="JLPT N5"
+        tools:layout="@layout/fragment_n5">
+
+
+        <argument
+            android:name="level"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_n5Fragment_to_kanjiFragment"
+            app:destination="@+id/kanjifragment"/>
+
+        <action
+            android:id="@+id/action_n5Fragment_to_grammarFragment"
+            app:destination="@+id/grammarfragment"/>
+
+
+        <action
+            android:id="@+id/action_n5Fragment_to_vocabFragment"
+            app:destination="@+id/vocabfragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_n4"
+        android:name="com.example.japanesereviewer123.ui.navn4.N4Fragment"
+        android:label="JLPT N4"
+        tools:layout="@layout/fragment_n4">
+
+        <argument
+            android:name="level"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_n4Fragment_to_kanjiFragment"
+            app:destination="@+id/kanjifragment"/>
+
+        <action
+            android:id="@+id/action_n4Fragment_to_grammarFragment"
+            app:destination="@+id/grammarfragment"/>
+
+
+        <action
+            android:id="@+id/action_n4Fragment_to_vocabFragment"
+            app:destination="@+id/vocabfragment"/>
+
+
+
+        </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_n3"
+        android:name="com.example.japanesereviewer123.ui.navn3.N3Fragment"
+        android:label="JLPT N3"
+        tools:layout="@layout/fragment_n3">
+
+        <argument
+            android:name="level"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_n3Fragment_to_kanjiFragment"
+            app:destination="@+id/kanjifragment"/>
+
+        <action
+            android:id="@+id/action_n3Fragment_to_grammarFragment"
+            app:destination="@+id/grammarfragment"/>
+
+
+        <action
+            android:id="@+id/action_n3Fragment_to_vocabFragment"
+            app:destination="@+id/vocabfragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_n2"
+        android:name="com.example.japanesereviewer123.ui.navn2.N2Fragment"
+        android:label="JLPT N2"
+        tools:layout="@layout/fragment_n2">
+
+
+        <argument
+            android:name="level"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_n2Fragment_to_kanjiFragment"
+            app:destination="@+id/kanjifragment"/>
+
+        <action
+            android:id="@+id/action_n2Fragment_to_grammarFragment"
+            app:destination="@+id/grammarfragment"/>
+
+
+        <action
+            android:id="@+id/action_n2Fragment_to_vocabFragment"
+            app:destination="@+id/vocabfragment"/>
+
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_n1"
+        android:name="com.example.japanesereviewer123.ui.navn1.N1Fragment"
+        android:label="JLPT N1"
+        tools:layout="@layout/fragment_n1">
+
+        <argument
+            android:name="level"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_n1Fragment_to_kanjiFragment"
+            app:destination="@+id/kanjifragment"/>
+
+        <action
+            android:id="@+id/action_n1Fragment_to_grammarFragment"
+            app:destination="@+id/grammarfragment"/>
+
+
+        <action
+            android:id="@+id/action_n1Fragment_to_vocabFragment"
+            app:destination="@+id/vocabfragment"/>
+
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/kanjifragment"
+        android:name="com.example.japanesereviewer123.ui.contentkanji.KanjiFragment"
+        android:label="JLPT Kanji"
+        tools:layout="@layout/fragment_kanji">
+
+        <action
+            android:id="@+id/action_kanjiFragment_to_n4Fragment"
+            app:destination="@id/nav_n4"
+            app:popUpTo="@id/nav_n4"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_kanjifragment_to_page2"
+            app:destination="@+id/kanjifragmentp2">
+
+            <!-- Argument definitions go here -->
+            <argument
+                android:name="filteredData"
+                app:argType="android.os.Bundle" />
+
+            <argument
+                android:name="originalData"
+                app:argType="android.os.Bundle" />
+
+            <argument
+                android:name="currentIndexFiltered"
+                app:argType="integer" />
+
+            <argument
+                android:name="currentIndexOriginal"
+                app:argType="integer" />
+
+            <argument
+                android:name="id"
+                app:argType="string" />
+
+            <argument
+                android:name="kanji"
+                app:argType="string" />
+
+            <argument
+                android:name="hiragana"
+                app:argType="string" />
+
+            <argument
+                android:name="meaning"
+                app:argType="string" />
+
+
+        </action>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/grammarfragment"
+        android:name="com.example.japanesereviewer123.ui.contentgrammar.GrammarFragment"
+        android:label="JLPT Grammar"
+        tools:layout="@layout/fragment_grammar">
+        <action
+            android:id="@+id/action_grammarFragment_to_n4Fragment"
+            app:destination="@id/nav_n4"
+            app:popUpTo="@id/nav_n4"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_grammarfragment_to_page2"
+            app:destination="@+id/grammarfragmentp2">
+
+            <!-- Argument definitions go here -->
+            <argument
+                android:name="filteredData"
+                app:argType="android.os.Bundle" />
+
+            <argument
+                android:name="originalData"
+                app:argType="android.os.Bundle" />
+
+            <argument
+                android:name="currentIndexFiltered"
+                app:argType="integer" />
+
+            <argument
+                android:name="currentIndexOriginal"
+                app:argType="integer" />
+
+            <argument
+                android:name="id"
+                app:argType="string" />
+
+            <argument
+                android:name="topic"
+                app:argType="string" />
+
+            <argument
+                android:name="content"
+                app:argType="string" />
+
+        </action>
+
+
+
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/vocabfragment"
+        android:name="com.example.japanesereviewer123.ui.contentvocab.VocabFragment"
+        android:label="JLPT Vocab"
+        tools:layout="@layout/fragment_vocab">
+
+        <action
+            android:id="@+id/action_vocabFragment_to_n4Fragment"
+            app:destination="@id/nav_n4"
+            app:popUpTo="@id/nav_n4"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_vocabfragment_to_page2"
+            app:destination="@+id/vocabfragmentp2">
+
+            <!-- Argument definitions go here -->
+            <argument
+                android:name="filteredData"
+                app:argType="android.os.Bundle" />
+
+            <argument
+                android:name="originalData"
+                app:argType="android.os.Bundle" />
+
+            <argument
+                android:name="currentIndexFiltered"
+                app:argType="integer" />
+
+            <argument
+                android:name="currentIndexOriginal"
+                app:argType="integer" />
+
+            <argument
+                android:name="id"
+                app:argType="string" />
+
+            <argument
+                android:name="vocab"
+                app:argType="string" />
+
+            <argument
+                android:name="hiragana"
+                app:argType="string" />
+
+            <argument
+                android:name="imageurl"
+                app:argType="string" />
+
+        </action>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/kanjifragmentp2"
+        android:name="com.example.japanesereviewer123.ui.contentkanji.KanjiFragmentP2"
+        android:label="JLPT Kanji"
+        tools:layout="@layout/fragment_kanji_p2">
+
+        <action
+            android:id="@+id/action_kanjifragmentp2_to_n4Fragment"
+            app:destination="@id/nav_n4"
+            app:popUpTo="@id/nav_n4"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_kanjifragment2_to_page3"
+            app:destination="@+id/kanjifragmentp3">
+
+        <!-- Argument definitions go here -->
+        <argument
+            android:name="kanji"
+            app:argType="string" />
+
+            <argument
+                android:name="hiragana"
+                app:argType="string" />
+
+            <argument
+                android:name="meaning"
+                app:argType="string" />
+        </action>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/kanjifragmentp3"
+        android:name="com.example.japanesereviewer123.ui.contentkanji.KanjiFragmentP3"
+        android:label="JLPT Kanji"
+        tools:layout="@layout/fragment_kanji_p3">
+
+        <action
+            android:id="@+id/action_kanjifragmentp3_to_n4Fragment"
+            app:destination="@id/nav_n4"
+            app:popUpTo="@id/nav_n4"
+            app:popUpToInclusive="true" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/grammarfragmentp2"
+        android:name="com.example.japanesereviewer123.ui.contentgrammar.GrammarFragmentP2"
+        android:label="JLPT Grammar"
+        tools:layout="@layout/fragment_grammar_p2">
+
+        <action
+            android:id="@+id/action_grammarfragmentp2_to_n4Fragment"
+            app:destination="@id/nav_n4"
+            app:popUpTo="@id/nav_n4"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/vocabfragmentp2"
+        android:name="com.example.japanesereviewer123.ui.contentvocab.VocabFragmentP2"
+        android:label="JLPT Grammar"
+        tools:layout="@layout/fragment_vocab_p2">
+
+        <action
+            android:id="@+id/action_vocabfragmentp2_to_n4Fragment"
+            app:destination="@id/nav_n4"
+            app:popUpTo="@id/nav_n4"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+
+</navigation>

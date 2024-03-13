@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- button_selector.xml -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Pressed state -->
-    <item android:state_pressed="true" android:drawable="@color/pressed_color" />
-    <!-- Focused state -->
-    <item android:state_focused="true" android:drawable="@color/pressed_color" />
-    <!-- Normal state -->
-    <item android:drawable="@color/blue" />
-</selector>
+<!-- res/drawable/button_pressed.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Solid color for the pressed state -->
+    <solid android:color="@color/colorAccent" />
+    <!-- Optional: Rounded corners -->
+    <corners android:radius="8dp" />
+</shape>

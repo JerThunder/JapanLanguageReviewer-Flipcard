@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:padding="16dp"
+    android:background="@drawable/btnselector"
+    android:layout_margin="10dp"
     android:layout_height="match_parent">
 
     <ImageView
@@ -22,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/kanjiImage"
         android:text="Kanji: 建物"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginLeft="10dp" />
@@ -31,20 +34,11 @@
         android:id="@+id/txtHiraganaWords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:layout_toRightOf="@+id/kanjiImage"
         android:layout_below="@+id/txtKanjiwords"
         android:text="Hiragana: たてもの"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginLeft="10dp" />
-
-
-
-
-
-
-
-
-
-
 </RelativeLayout>

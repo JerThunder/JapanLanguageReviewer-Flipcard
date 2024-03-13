@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Top Section (Fixed Height) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yourTopSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your top section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+
+        <!-- Horizontal Layout for Image and Text -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- ImageView with fixed height -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:src="@drawable/n4banner"
+                android:scaleType="fitXY" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Middle Section (ScrollView) -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+            <!-- Add your middle section content here -->
+            <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:iconifiedByDefault="true"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusedByDefault="true"
+                    android:queryHint="Search Here..">
+                </androidx.appcompat.widget.SearchView>
+
+
+            </LinearLayout>
+
+
+
+
+            <!-- Add any other views or widgets above the ListView here -->
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="10dp" />
+            <!-- Add any other views or widgets below the ListView here -->
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Section (Small) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yourBottomSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your bottom section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JLPT N4 GRAMMAR"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+</LinearLayout>
