@@ -26,6 +26,7 @@
 
             <!-- ImageView with fixed height -->
             <ImageView
+                android:id="@+id/idbanner"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:src="@drawable/n5banner"
@@ -71,7 +72,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="Kanji"
+                    android:text="Kanji N5"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -106,7 +107,7 @@
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="Grammar"
+                    android:text="Grammar N5"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -153,7 +154,7 @@
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="Vocabulary"
+                    android:text="Vocabulary N5"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -188,7 +189,7 @@
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="Exercise"
+                    android:text="Exercise N5"
                     android:textSize="20sp" />
 
                 <ImageView
@@ -215,7 +216,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="JLPT N5"
+            android:text="頑張ってください！！"
+            android:textColor="@color/white"
             android:gravity="center_horizontal" />
     </LinearLayout>
 

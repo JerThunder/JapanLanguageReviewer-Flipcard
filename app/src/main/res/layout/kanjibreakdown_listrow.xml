@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/kanjiImage"
         android:text="hello world"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginLeft="10dp" />
@@ -32,6 +33,7 @@
         android:layout_toRightOf="@id/kanjiImage"
         android:text="Kun: ありがとう"
         android:textStyle="italic"
+        android:textColor="@color/black"
         android:maxLength="50"
         android:textSize="15dp"
         android:layout_marginLeft="10dp" />
@@ -43,6 +45,7 @@
         android:layout_below="@+id/txtkunyomi"
         android:layout_toRightOf="@id/kanjiImage"
         android:text="On:　ございます "
+        android:textColor="@color/black"
         android:textStyle="italic"
         android:maxLength="50"
         android:textSize="15dp"
@@ -55,6 +58,7 @@
         android:layout_below="@+id/txtonyomi"
         android:layout_toRightOf="@id/kanjiImage"
         android:text="Level: N4"
+        android:textColor="@color/black"
         android:textStyle="italic"
         android:maxLength="50"
         android:textSize="15dp"

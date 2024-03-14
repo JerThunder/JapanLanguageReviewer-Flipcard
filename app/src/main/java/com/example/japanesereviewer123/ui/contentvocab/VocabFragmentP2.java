@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,7 +48,8 @@ public class VocabFragmentP2 extends Fragment {
     private ArrayList<GoiDataModel> filteredData;
     private TextToSpeech textToSpeech;
     private static final int TTS_CHECK_CODE = 1;
-    String id,vocab,hiragana,imageurl;
+    String id,vocab,hiragana,imageurl, level;
+    ImageView imgbanner;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,14 +58,7 @@ public class VocabFragmentP2 extends Fragment {
         View viewRoot = inflater.inflate(R.layout.fragment_vocab_p2, container, false);
 
 
-        AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle("JLPT N4 Vocab");
-        }
-
         img1= viewRoot.findViewById(R.id.idfrontImage);
-
         txtvocab = viewRoot.findViewById(R.id.txtvocab);
         textBack = viewRoot.findViewById(R.id.idbackcard);
         nextBtn = viewRoot.findViewById(R.id.idNextBtn);
@@ -98,9 +93,50 @@ public class VocabFragmentP2 extends Fragment {
             filteredData = bundle.getParcelableArrayList("filteredData"); // The filtered data
             currentIndexFiltered = bundle.getInt("currentIndexFiltered", -1); // Default value if not found
             currentIndexOriginal = bundle.getInt("currentIndexOriginal", -2);
-
+            level = bundle.getString("level");
         }
 
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("JLPT " + level + " Vocabulary");
+        }
+
+
+
+        imgbanner = viewRoot.findViewById(R.id.idbanner);
+        Uri bannerUri;
+
+        switch (level) {
+            case "N1":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n1banner);
+                break;
+            case "N2":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n2banner);
+                break;
+            case "N3":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n3banner);
+                break;
+            case "N4":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n4banner);
+                break;
+            case "N5":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n5banner);
+                break;
+            default:
+                // Handle default case or set a default image
+                bannerUri = null;
+                break;
+        }
+
+        if (bannerUri != null) {
+            Picasso.get()
+                    .load(bannerUri)
+                    .resize(2000, 0) // Resize the image to a smaller size
+                    .onlyScaleDown() // Only scale down, don't scale up
+                    .into(imgbanner); // imgbanner is your ImageView where you want to display the image
+        }
 
 
         textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {

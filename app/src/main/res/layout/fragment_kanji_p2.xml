@@ -23,6 +23,7 @@
 
             <!-- ImageView with fixed height -->
             <ImageView
+                android:id="@+id/idbanner"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:src="@drawable/n4banner"
@@ -209,7 +210,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="JLPT N4 KANJI"
+            android:text="頑張ってください！！"
+            android:textColor="@color/white"
             android:gravity="center_horizontal" />
 
     </LinearLayout>

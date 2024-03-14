@@ -7,9 +7,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,10 +21,12 @@ import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.japanesereviewer123.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +46,9 @@ public class KanjiFragmentP2 extends Fragment {
     private TextToSpeech textToSpeech;
     private static final int TTS_CHECK_CODE = 1;
     String passKanji,passMeaning,passhiragana;
-    String id,kanji,hiragana,meaning;
+    String id,kanji,hiragana,meaning, level;
+    ImageView imgbanner;
+    Uri bannerUri;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +63,7 @@ public class KanjiFragmentP2 extends Fragment {
         btndetails = viewRoot.findViewById(R.id.idDetails);
         btnPlay = viewRoot.findViewById(R.id.idPlay);
         btnrandom = viewRoot.findViewById(R.id.idbtnrandomizer);
+        imgbanner = viewRoot.findViewById(R.id.idbanner);
 
         frontAnim = new AnimatorSet();
         backAnim = new AnimatorSet();
@@ -72,8 +80,8 @@ public class KanjiFragmentP2 extends Fragment {
         // Retrieve the arguments bundle
         Bundle bundle = getArguments();
         if (bundle != null) {
-            // Retrieve the string from the bundle
-             id = bundle.getString("id");
+
+            id = bundle.getString("id");
              kanji = bundle.getString("kanji");
              hiragana = bundle.getString("hiragana");
              meaning = bundle.getString("meaning");
@@ -81,8 +89,52 @@ public class KanjiFragmentP2 extends Fragment {
             filteredData = bundle.getParcelableArrayList("filteredData"); // The filtered data
             currentIndexFiltered = bundle.getInt("currentIndexFiltered", -1); // Default value if not found
             currentIndexOriginal = bundle.getInt("currentIndexOriginal", -2);
+            level = bundle.getString("level");
 
         }
+
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("JLPT " + level + " Kanji");
+        }
+
+
+
+
+        switch (level) {
+            case "N1":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n1banner);
+                break;
+            case "N2":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n2banner);
+                break;
+            case "N3":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n3banner);
+                break;
+            case "N4":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n4banner);
+                break;
+            case "N5":
+                bannerUri = Uri.parse("android.resource://com.example.japanesereviewer123/" + R.drawable.n5banner);
+                break;
+            default:
+                // Handle default case or set a default image
+                bannerUri = null;
+                break;
+        }
+
+        if (bannerUri != null) {
+            Picasso.get()
+                    .load(bannerUri)
+                    .resize(2000, 0) // Resize the image to a smaller size
+                    .onlyScaleDown() // Only scale down, don't scale up
+                    .into(imgbanner); // imgbanner is your ImageView where you want to display the image
+        }
+
+
+
 
 
 
@@ -143,7 +195,7 @@ public class KanjiFragmentP2 extends Fragment {
                 bundle123.putString("hiragana",passhiragana);
                 bundle123.putString("kanji",passKanji);
                 bundle123.putString("meaning",passMeaning);
-
+                bundle123.putString("level",level);
                 // Navigate to the kanjiFragment and pass the arguments
                 navController.navigate(R.id.action_kanjifragment2_to_page3, bundle);
             }
