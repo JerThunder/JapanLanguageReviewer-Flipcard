@@ -197,7 +197,7 @@ public class KanjiFragmentP2 extends Fragment {
                 bundle123.putString("meaning",passMeaning);
                 bundle123.putString("level",level);
                 // Navigate to the kanjiFragment and pass the arguments
-                navController.navigate(R.id.action_kanjifragment2_to_page3, bundle);
+                navController.navigate(R.id.action_kanjifragment2_to_page3, bundle123);
             }
         });
 
