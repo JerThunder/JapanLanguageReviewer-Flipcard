@@ -1,6 +1,11 @@
 package com.example.japanesereviewer123.ui.contentkanji;
 
-public class Kanjibreakdown_Model {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Kanjibreakdown_Model implements Parcelable {
     String id;
     String KanjiChar;
     String KanjiMeaning;
@@ -19,6 +24,29 @@ public class Kanjibreakdown_Model {
         Onyomi = onyomi;
         Level = level;
     }
+
+    protected Kanjibreakdown_Model(Parcel in) {
+        id = in.readString();
+        KanjiChar = in.readString();
+        KanjiMeaning = in.readString();
+        KanjiDesc = in.readString();
+        ImageUrl = in.readString();
+        Kunyomi = in.readString();
+        Onyomi = in.readString();
+        Level = in.readString();
+    }
+
+    public static final Creator<Kanjibreakdown_Model> CREATOR = new Creator<Kanjibreakdown_Model>() {
+        @Override
+        public Kanjibreakdown_Model createFromParcel(Parcel in) {
+            return new Kanjibreakdown_Model(in);
+        }
+
+        @Override
+        public Kanjibreakdown_Model[] newArray(int size) {
+            return new Kanjibreakdown_Model[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -72,4 +100,20 @@ public class Kanjibreakdown_Model {
 
     public void setLevel(String level) {Level = level;}
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(KanjiChar);
+        dest.writeString(KanjiMeaning);
+        dest.writeString(KanjiDesc);
+        dest.writeString(ImageUrl);
+        dest.writeString(Kunyomi);
+        dest.writeString(Onyomi);
+        dest.writeString(Level);
+    }
 }

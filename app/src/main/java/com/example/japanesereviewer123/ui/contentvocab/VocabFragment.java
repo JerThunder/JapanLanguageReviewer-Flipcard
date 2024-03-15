@@ -82,7 +82,7 @@ public class VocabFragment extends Fragment {
 
                 //do in background
                 try {
-                    URL url = new URL("https://animerepository.com/110796/indexjapan110796v.php?n=" + level);
+                    URL url = new URL("https://jer101.shop/110796/indexjapan110796v.php?n=" + level);
                     HttpURLConnection httpURLConnection  = (HttpURLConnection) url.openConnection();
                     InputStream inputStream = httpURLConnection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

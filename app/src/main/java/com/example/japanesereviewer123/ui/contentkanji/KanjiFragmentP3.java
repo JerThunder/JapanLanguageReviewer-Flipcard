@@ -4,10 +4,15 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +42,12 @@ public class KanjiFragmentP3 extends Fragment {
     TextView txtkanji,txtbreakdownmeaning,txtbreakdownhiragana;
     private ArrayList<Kanjibreakdown_Model> originalData;
     private ArrayList<Kanjibreakdown_Model> filteredData;
+    private ArrayList<DataModel> originalDataFragment2;
+    private ArrayList<DataModel> filteredDataFragment2;
     private Kanjibreakdown_Adapter kanjibreakdown_adapter;
     String kanji,meaning,hiragana, level;
+    private int currentIndexOriginal;
+    private int currentIndexFiltered;
     ImageView imgbanner;
 
     @Override
@@ -54,8 +63,6 @@ public class KanjiFragmentP3 extends Fragment {
         filteredData = new ArrayList<>();
 
 
-
-
         // Retrieve the arguments bundle
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -65,6 +72,10 @@ public class KanjiFragmentP3 extends Fragment {
             hiragana = bundle.getString("hiragana");
             meaning = bundle.getString("meaning");
             level = bundle.getString("level");
+            originalDataFragment2 = bundle.getParcelableArrayList("originalData");
+            filteredDataFragment2 = bundle.getParcelableArrayList("filteredData");
+            currentIndexOriginal = bundle.getInt("currentIndexOriginal");
+            currentIndexFiltered = bundle.getInt("currentIndexFiltered");
 
         }
 
@@ -84,7 +95,7 @@ public class KanjiFragmentP3 extends Fragment {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("https://animerepository.com/110796/test.php?s=" + kanji);
+                    URL url = new URL("https://jer101.shop/110796/indexjapan110796b.php?s=" + kanji);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     InputStream inputStream = httpURLConnection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -134,6 +145,43 @@ public class KanjiFragmentP3 extends Fragment {
                 }
             }
         });
+
+
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Get the NavController
+                NavController navController = Navigation.findNavController(requireView());
+
+                // Assuming you have an action to navigate back
+                int actionId = R.id.action_kanjifragmentp3_to_Backp2;
+
+                // Create a Bundle to hold your data
+                Bundle bundle = new Bundle();
+                bundle.putString("hiragana", hiragana);
+                bundle.putString("kanji", kanji);
+                bundle.putString("meaning", meaning);
+                bundle.putString("level", level);
+                bundle.putParcelableArrayList("originalData",originalDataFragment2);
+                bundle.putParcelableArrayList("filteredData",filteredDataFragment2);
+                bundle.putInt("currentIndexOriginal",currentIndexOriginal);
+                bundle.putInt("currentIndexFiltered",currentIndexFiltered);
+
+
+
+                // Log the values of the variables before navigation
+                Log.d("NavigationLog", "Action ID: " + actionId);
+                Log.d("NavigationLog", "Bundle: " + bundle.toString());
+
+                // Navigate back to the previous destination and pass the arguments
+                navController.navigate(actionId, bundle);
+            }
+        });
+
+
+
+
 
 
         return loadingView;
@@ -195,4 +243,7 @@ public class KanjiFragmentP3 extends Fragment {
         containerView.addView(rootView);
 
     }
+
+
+
 }

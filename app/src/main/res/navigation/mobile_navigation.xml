@@ -361,11 +361,41 @@
         android:label="JLPT Kanji"
         tools:layout="@layout/fragment_kanji_p3">
 
+        <argument
+            android:name="level"
+            app:argType="string" />
+
         <action
             android:id="@+id/action_kanjifragmentp3_to_n4Fragment"
             app:destination="@id/nav_n4"
             app:popUpTo="@id/nav_n4"
             app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_kanjifragmentp3_to_Backp2"
+            app:destination="@+id/kanjifragmentp2">
+
+            <!-- Argument definitions go here -->
+
+            <argument
+                android:name="id"
+                app:argType="string" />
+
+            <argument
+                android:name="kanji"
+                app:argType="string" />
+
+            <argument
+                android:name="hiragana"
+                app:argType="string" />
+
+            <argument
+                android:name="meaning"
+                app:argType="string" />
+        </action>
+
+
+
 
 
     </fragment>

@@ -83,7 +83,7 @@ public class KanjiFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("https://animerepository.com/110796/indexjapan110796.php?n=" + level);
+                    URL url = new URL("https://jer101.shop/110796/indexjapan110796.php?n=" + level);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     InputStream inputStream = httpURLConnection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

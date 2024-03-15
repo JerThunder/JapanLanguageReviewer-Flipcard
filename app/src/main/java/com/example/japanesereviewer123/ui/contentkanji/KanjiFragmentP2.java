@@ -178,12 +178,6 @@ public class KanjiFragmentP2 extends Fragment {
         btndetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the current data model
-                DataModel selectedData = originalData.get(currentIndexOriginal);
-                // Update passKanji with the current kanji
-                passKanji = selectedData.getkanji();
-                passMeaning = selectedData.getMeaning();
-                passhiragana=  selectedData.gethiragana();
 
 
                 NavController navController = Navigation.findNavController(requireView());
@@ -191,13 +185,19 @@ public class KanjiFragmentP2 extends Fragment {
                 // Put the data into a bundle
                 Bundle bundle123 = new Bundle();
 
-
-                bundle123.putString("hiragana",passhiragana);
-                bundle123.putString("kanji",passKanji);
-                bundle123.putString("meaning",passMeaning);
+                bundle123.putString("id",id);
+                bundle123.putString("hiragana",hiragana);
+                bundle123.putString("kanji",kanji);
+                bundle123.putString("meaning",meaning);
                 bundle123.putString("level",level);
+                bundle123.putParcelableArrayList("originalData",originalData);
+                bundle123.putParcelableArrayList("filteredData",filteredData);
+                bundle123.putInt("currentIndexFiltered",currentIndexFiltered);
+                bundle123.putInt("currentIndexOriginal",currentIndexOriginal);
                 // Navigate to the kanjiFragment and pass the arguments
                 navController.navigate(R.id.action_kanjifragment2_to_page3, bundle123);
+
+
             }
         });
 
@@ -484,7 +484,12 @@ public class KanjiFragmentP2 extends Fragment {
         DataModel selectedData = originalData.get(currentIndexOriginal);
         textFront.setText("KANJI \n" + selectedData.getkanji());
         textBack.setText("HIRAGANA \n" + selectedData.gethiragana() + "\n\n" + "MEANING \n" + selectedData.getMeaning());
-        passKanji = selectedData.getkanji();
+        kanji = selectedData.getkanji();
+        hiragana = selectedData.gethiragana();
+        meaning = selectedData.getMeaning();
+
+
+
     }
 
 
