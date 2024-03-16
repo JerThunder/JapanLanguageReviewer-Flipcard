@@ -330,6 +330,12 @@
             app:popUpToInclusive="true" />
 
         <action
+            android:id="@+id/action_kanjifragmentp2_to_Backp1"
+            app:destination="@+id/kanjifragment"/>
+
+
+
+        <action
             android:id="@+id/action_kanjifragment2_to_page3"
             app:destination="@+id/kanjifragmentp3">
 

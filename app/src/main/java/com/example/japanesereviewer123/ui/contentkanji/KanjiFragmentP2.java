@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -440,6 +442,33 @@ public class KanjiFragmentP2 extends Fragment {
 
             }
         });
+
+
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Get the NavController
+                NavController navController = Navigation.findNavController(requireView());
+
+                // Assuming you have an action to navigate back
+                int actionId = R.id.action_kanjifragmentp2_to_Backp1;
+
+                // Create a Bundle to hold your data
+                Bundle bundle = new Bundle();
+
+                bundle.putString("level", level);
+
+
+                // Log the values of the variables before navigation
+                Log.d("NavigationLog", "Action ID: " + actionId);
+                Log.d("NavigationLog", "Bundle: " + bundle.toString());
+
+                // Navigate back to the previous destination and pass the arguments
+                navController.navigate(actionId, bundle);
+            }
+        });
+
 
 
         return viewRoot;
