@@ -77,11 +77,11 @@
 
                 <ImageView
                     android:id="@+id/imgdashkanji"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:src="@drawable/reviewerlogo" />
+                    android:src="@drawable/ico_kanji" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -112,11 +112,11 @@
 
                 <ImageView
                     android:id="@+id/imgdashgrammar"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:src="@drawable/reviewerlogo" />
+                    android:src="@drawable/ico_grammar" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
@@ -159,11 +159,11 @@
 
                 <ImageView
                     android:id="@+id/imgdashvocab"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:src="@drawable/reviewerlogo" />
+                    android:src="@drawable/ico_vocab" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -194,11 +194,11 @@
 
                 <ImageView
                     android:id="@+id/imgdashexercise"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:src="@drawable/reviewerlogo" />
+                    android:src="@drawable/ico_exercise" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
