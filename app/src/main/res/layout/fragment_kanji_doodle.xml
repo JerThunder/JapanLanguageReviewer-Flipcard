@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightcolors"
+    android:orientation="vertical">
+
+    <!-- Top Section (Small) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yourTopSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your top section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+        <!-- Horizontal Layout for Image and Text -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- ImageView with fixed height -->
+            <ImageView
+                android:id="@+id/idbanner"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:src="@drawable/n4banner"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="JLPT N4"
+                android:background="@color/maroon"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Middle Section (Large) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:layout_marginTop="80dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="30dp">
+
+
+
+                <TextView
+                    android:id="@+id/btnUndo"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btnselector"
+                    android:gravity="center_vertical"
+                    android:text="Undo Changes"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+
+
+            <me.panavtec.drawableview.DrawableView
+
+                android:id="@+id/paintview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            </me.panavtec.drawableview.DrawableView>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </LinearLayout>
+
+    <!-- Bottom Section (Small) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yourBottomSectionColor"
+        android:orientation="vertical">
+
+        <!-- Add your bottom section content here -->
+        <!-- Example: TextViews, ImageViews, Buttons, etc. -->
+
+
+        <!-- Horizontal LinearLayout for Previous and Next Buttons -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="頑張ってください！！"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
+</LinearLayout>
