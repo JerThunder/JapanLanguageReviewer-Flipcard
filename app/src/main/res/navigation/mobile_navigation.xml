@@ -358,7 +358,33 @@
                 app:argType="string" />
         </action>
 
+
+
+        <action
+            android:id="@+id/action_kanjifragmentp2_to_doodle"
+            app:destination="@id/kanjifragmentdoodle" /> <!-- Ensure this points to the correct fragment -->
+
+
     </fragment>
+
+
+
+    <fragment
+        android:id="@+id/kanjifragmentdoodle"
+        android:name="com.example.japanesereviewer123.ui.contentkanji.KanjiFragmentDoodle"
+        android:label="Doodle"
+        tools:layout="@layout/fragment_kanji_doodle">
+
+        <action
+            android:id="@+id/action_kanjifragmentp2_to_doodle"
+            app:destination="@id/action_kanjifragmentp2_to_doodle"
+            app:popUpTo="@id/action_kanjifragmentp2_to_doodle"
+            app:popUpToInclusive="true" />
+
+
+    </fragment>
+
+
 
 
     <fragment

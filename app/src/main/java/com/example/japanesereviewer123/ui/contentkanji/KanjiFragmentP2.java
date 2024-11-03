@@ -208,9 +208,12 @@ public class KanjiFragmentP2 extends Fragment {
             @Override
             public void onClick(View v) {
 
-                speakJapanese();
-                // String textSpeak = "こにちは";
-                //   textToSpeech.speak(textSpeak,textToSpeech.QUEUE_FLUSH,null,null);
+                NavController navController = Navigation.findNavController(requireView());
+
+                // Put the data into a bundle
+                Bundle bundle123 = new Bundle();
+
+                navController.navigate(R.id.action_kanjifragmentp2_to_doodle, bundle123);
             }
         });
 
